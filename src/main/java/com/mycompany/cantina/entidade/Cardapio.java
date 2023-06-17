@@ -23,9 +23,12 @@ public class Cardapio
         itensCardapios = new ArrayList<>();
     }
 
-    public Cardapio(String descricao, Double valor) {
-        this.descricao = descricao;
-        this.valor = valor;
+    public Cardapio(Long id, String descricao, Double valor) {
+        setId(id);
+
+        setDescricao(descricao);
+        setValor(valor);
+
     }
 
 //</editor-fold>
@@ -66,6 +69,7 @@ public class Cardapio
     @Override
     public String toString() {
         return "Cardapio{"
+                + "id=" + getId()
                 + "descricao=" + descricao
                 + ", valor=" + valor
                 + ", itensCardapios=" + itensCardapios
