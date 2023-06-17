@@ -4,6 +4,8 @@
  */
 package com.mycompany.cantina.entidade;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author patri
@@ -12,12 +14,13 @@ public class Cardapio
         extends Entidade {
 
     private String descricao;
-
     // valor: Atríbuto derivado
     private Double valor;
+    ArrayList<ItemCardapio> itensCardapios;
 
     //<editor-fold defaultstate="collapsed" desc="Construtores">
     public Cardapio() {
+        itensCardapios = new ArrayList<>();
     }
 
     public Cardapio(String descricao, Double valor) {
@@ -43,13 +46,29 @@ public class Cardapio
         this.valor = valor;
     }
 
+    public ArrayList<ItemCardapio> getItensCardapios() {
+        return itensCardapios;
+    }
+
+    public void setItensCardapios(ArrayList<ItemCardapio> itensCardapios) {
+        this.itensCardapios = itensCardapios;
+    }
+
     // TODO: Implementar o cálculo do valor
+//</editor-fold>
+    //<editor-fold defaultstate="collapsed" desc="Adiciona Cardápio">
+    public void adicionarCardapio(ItemCardapio itemCardapio) {
+        itensCardapios.add(itemCardapio);
+        itemCardapio.setCardapio(this);
+    }
+
 //</editor-fold>
     @Override
     public String toString() {
         return "Cardapio{"
                 + "descricao=" + descricao
                 + ", valor=" + valor
+                + ", itensCardapios=" + itensCardapios
                 + '}';
     }
 
