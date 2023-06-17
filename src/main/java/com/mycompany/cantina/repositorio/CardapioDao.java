@@ -13,6 +13,16 @@ import java.util.logging.Logger;
 
 /**
  *
+ * <code>
+ * CREATE TABLE cardapio (
+ *  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+ *  `descricao` varchar(50) NOT NULL,
+ *  `valor` double NOT NULL,
+ *  PRIMARY KEY (`id`),
+ *  UNIQUE KEY `id` (`id`)
+ *  );
+ * </code>
+ *
  * @author patri
  */
 public class CardapioDao
@@ -22,25 +32,26 @@ public class CardapioDao
 
     @Override
     public String getSaveStatment() {
-        return "insert into" + TABLE + "(id, descricao, valor) values (?, ?, ?)";
+        return "insert into " + TABLE + "(descricao, valor) values (?, ?)";
     }
 
     @Override
     public String getUpdateStatment() {
-        return "update" + TABLE + "set descricao = ?, valor = ? where id = ?";
+        return "update " + TABLE + " set descricao = ?, valor = ? where id = ?";
     }
 
     @Override
     public void composeSaveOrUpdateStatement(PreparedStatement pstmt, Cardapio e) {
         try
         {
+
+            pstmt.setObject(1, e.getDescricao(), java.sql.Types.VARCHAR);
+            pstmt.setObject(2, e.getValor(), java.sql.Types.DOUBLE);
+
             if (e.getId() != null)
             {
-                pstmt.setObject(1, e.getId(), java.sql.Types.BIGINT);
+                pstmt.setObject(3, e.getId(), java.sql.Types.BIGINT);
             }
-
-            pstmt.setObject(2, e.getDescricao(), java.sql.Types.VARCHAR);
-            pstmt.setObject(3, e.getValor(), java.sql.Types.DOUBLE);
         } catch (SQLException ex)
         {
             Logger.getLogger(CardapioDao.class.getName()).log(Level.SEVERE, null, ex);
@@ -55,7 +66,7 @@ public class CardapioDao
     @Override
     public String getFindByIdStatment() {
         return "select id, descricao, valor"
-                + " from " + TABLE + "where id = ?";
+                + " from " + TABLE + " where id = ?";
     }
 
     @Override

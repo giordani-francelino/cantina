@@ -70,7 +70,7 @@ public class Cardapio
     public String toString() {
         return "Cardapio{"
                 + "id=" + getId()
-                + "descricao=" + descricao
+                + ", descricao=" + descricao
                 + ", valor=" + valor
                 + ", itensCardapios=" + itensCardapios
                 + '}';
