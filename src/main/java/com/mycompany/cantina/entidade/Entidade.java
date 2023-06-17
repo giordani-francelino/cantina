@@ -50,8 +50,4 @@ public abstract class Entidade {
     public void setId(Long id) {
         this.id = id;
     }
-
-
-    
-
 }
