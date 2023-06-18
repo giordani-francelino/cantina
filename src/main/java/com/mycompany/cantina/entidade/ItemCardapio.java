@@ -11,8 +11,9 @@ package com.mycompany.cantina.entidade;
 public class ItemCardapio
         extends Entidade {
 
-    private Produto produto;
     private Cardapio cardapio;
+    private Produto produto;
+
     private Integer quantidade;
     private Double preco;
 
@@ -20,9 +21,9 @@ public class ItemCardapio
     public ItemCardapio() {
     }
 
-    public ItemCardapio(Produto produto, Cardapio cardapio, Integer quantidade, Double preco) {
-        this.produto = produto;
+    public ItemCardapio(Cardapio cardapio, Produto produto, Integer quantidade, Double preco) {
         this.cardapio = cardapio;
+        this.produto = produto;
         this.quantidade = quantidade;
         this.preco = preco;
     }
@@ -65,11 +66,12 @@ public class ItemCardapio
     @Override
     public String toString() {
         return "ItemCardapio{"
-                + "produto=" + produto
-                + ", cardapio=" + cardapio
+                + "id=" + getId()
+//                + ", idCardapio=" + cardapio.getId()
+//                + ", idProduto=" + produto.getId()
                 + ", quantidade=" + quantidade
                 + ", preco=" + preco
-                + '}';
+                + '}' + '\n';
     }
 
 }

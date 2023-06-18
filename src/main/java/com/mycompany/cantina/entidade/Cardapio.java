@@ -16,6 +16,7 @@ public class Cardapio
     private String descricao;
     // valor: Atríbuto derivado
     private Double valor;
+
     ArrayList<ItemCardapio> itensCardapios;
 
     //<editor-fold defaultstate="collapsed" desc="Construtores">
@@ -23,12 +24,11 @@ public class Cardapio
         itensCardapios = new ArrayList<>();
     }
 
-    public Cardapio(Long id, String descricao, Double valor) {
-        setId(id);
+    public Cardapio(String descricao, Double valor) {
+        this();
 
         setDescricao(descricao);
         setValor(valor);
-
     }
 
 //</editor-fold>
@@ -60,7 +60,7 @@ public class Cardapio
     // TODO: Implementar o cálculo do valor
 //</editor-fold>
     //<editor-fold defaultstate="collapsed" desc="Adiciona Cardápio">
-    public void adicionarCardapio(ItemCardapio itemCardapio) {
+    public void adicionarItemCardapio(ItemCardapio itemCardapio) {
         itensCardapios.add(itemCardapio);
         itemCardapio.setCardapio(this);
     }
@@ -72,8 +72,8 @@ public class Cardapio
                 + "id=" + getId()
                 + ", descricao=" + descricao
                 + ", valor=" + valor
-                + ", itensCardapios=" + itensCardapios
-                + '}';
+//                + ", itensCardapios=" + itensCardapios
+                + '}' + '\n';
     }
 
 }

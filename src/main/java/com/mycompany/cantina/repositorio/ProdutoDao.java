@@ -4,7 +4,7 @@
  */
 package com.mycompany.cantina.repositorio;
 
-import com.mycompany.cantina.entidade.Cardapio;
+import com.mycompany.cantina.entidade.Produto;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -15,28 +15,28 @@ import java.util.logging.Logger;
  *
  * @author patri
  */
-public class CardapioDao
-        extends Dao<Cardapio> {
+public class ProdutoDao
+        extends Dao<Produto> {
 
-    public static final String TABLE = "cardapio";
+    public static final String TABLE = "produto";
 
     @Override
     public String getSaveStatment() {
-        return "insert into " + TABLE + "(descricao, valor) values (?, ?)";
+        return "insert into " + TABLE + "(descricao, preco) values (?, ?)";
     }
 
     @Override
     public String getUpdateStatment() {
-        return "update " + TABLE + " set descricao = ?, valor = ? where id = ?";
+        return "update " + TABLE + " set descricao = ?, preco = ? where id = ?";
     }
 
     @Override
-    public void composeSaveOrUpdateStatement(PreparedStatement pstmt, Cardapio e) {
+    public void composeSaveOrUpdateStatement(PreparedStatement pstmt, Produto e) {
         try
         {
 
             pstmt.setObject(1, e.getDescricao(), java.sql.Types.VARCHAR);
-            pstmt.setObject(2, e.getValor(), java.sql.Types.DOUBLE);
+            pstmt.setObject(2, e.getPreco(), java.sql.Types.DOUBLE);
 
             if (e.getId() != null)
             {
@@ -44,7 +44,7 @@ public class CardapioDao
             }
         } catch (SQLException ex)
         {
-            Logger.getLogger(CardapioDao.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ProdutoDao.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -55,32 +55,31 @@ public class CardapioDao
 
     @Override
     public String getFindByIdStatment() {
-        return "select id, descricao, valor"
+        return "select id, descricao, preco"
                 + " from " + TABLE + " where id = ?";
     }
 
     @Override
     public String getFindAllStatment() {
-        return "select id, descricao, valor"
+        return "select id, descricao, preco"
                 + " from " + TABLE;
     }
 
     @Override
-    public Cardapio extractObject(ResultSet resultSet) {
-        Cardapio cardapio = null;
+    public Produto extractObject(ResultSet resultSet) {
+        Produto produto = null;
 
         try
         {
-            cardapio = new Cardapio();
-            cardapio.setId(resultSet.getLong("id"));
-            cardapio.setDescricao(resultSet.getString("descricao"));
-            cardapio.setValor(resultSet.getDouble("valor"));
+            produto = new Produto();
+            produto.setId(resultSet.getLong("id"));
+            produto.setDescricao(resultSet.getString("descricao"));
+            produto.setPreco(resultSet.getDouble("preco"));
         } catch (SQLException ex)
         {
-            Logger.getLogger(CardapioDao.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ProdutoDao.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        return cardapio;
+        return produto;
     }
-
 }

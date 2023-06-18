@@ -13,10 +13,11 @@ import java.util.ArrayList;
 public class Produto
         extends Entidade {
 
-    private String descricao;
-    private Double preco;
     ArrayList<ItemVenda> itensVendas;
     ArrayList<ItemCardapio> itensCardapios;
+
+    private String descricao;
+    private Double preco;
 
     //<editor-fold defaultstate="collapsed" desc="Construtores">
     public Produto() {
@@ -26,8 +27,9 @@ public class Produto
 
     public Produto(String descricao, Double preco) {
         this();
-        this.descricao = descricao;
-        this.preco = preco;
+
+        setDescricao(descricao);
+        setPreco(preco);
     }
 
 //</editor-fold>
@@ -79,7 +81,7 @@ public class Produto
         itemVenda.setProduto(this);
     }
 
-    public void adicionarCardapio(ItemCardapio itemCardapio) {
+    public void adicionarItemCardapio(ItemCardapio itemCardapio) {
         itensCardapios.add(itemCardapio);
         itemCardapio.setProduto(this);
     }
@@ -87,12 +89,13 @@ public class Produto
 //</editor-fold>
     @Override
     public String toString() {
-        return "Produto{"
-                + "descricao=" + descricao
+        return "Produto{"   
+                + "id=" + getId()
+                + ", descricao=" + descricao
                 + ", preco=" + preco
-                + ", itensVendas=" + itensVendas
-                + ", itensCardapios=" + itensCardapios
-                + '}';
+//                + ", itensVendas=" + itensVendas
+//                + ", itensCardapios=" + itensCardapios
+                + '}' + '\n';
     }
 
 }
