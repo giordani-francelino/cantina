@@ -55,10 +55,11 @@ public class Pessoa
     @Override
     public String toString() {
         return "Pessoa{"
-                + "cpf=" + cpf
+                + "id=" + getId()
+                + ", cpf=" + cpf
                 + ", nome=" + nome
                 + ", endereco=" + endereco
-                + '}';
+                + '}' + '\n';
     }
 
 }

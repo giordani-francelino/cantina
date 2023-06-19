@@ -4,7 +4,9 @@
  */
 package com.mycompany.cantina.repositorio;
 
+import com.mycompany.cantina.entidade.Cardapio;
 import com.mycompany.cantina.entidade.ItemCardapio;
+import com.mycompany.cantina.entidade.Produto;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -12,7 +14,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * 
+ *
  * @author patri
  */
 public class ItemCardapioDao
@@ -34,7 +36,6 @@ public class ItemCardapioDao
     public void composeSaveOrUpdateStatement(PreparedStatement pstmt, ItemCardapio e) {
         try
         {
-
             pstmt.setObject(1, e.getCardapio().getId(), java.sql.Types.BIGINT);
             pstmt.setObject(2, e.getProduto().getId(), java.sql.Types.BIGINT);
             pstmt.setObject(3, e.getQuantidade(), java.sql.Types.INTEGER);
@@ -46,7 +47,7 @@ public class ItemCardapioDao
             }
         } catch (SQLException ex)
         {
-            Logger.getLogger(ItemCardapio.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ItemCardapioDao.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -69,11 +70,21 @@ public class ItemCardapioDao
 
     @Override
     public ItemCardapio extractObject(ResultSet resultSet) {
+        Cardapio cardapio = null;
+        Produto produto = null;
         ItemCardapio itemCardapio = null;
 
         try
         {
+            Long idCardapio = resultSet.getLong("idCardapio");
+            Long idProduto = resultSet.getLong("idProduto");
+            
+            cardapio = new CardapioDao().findById(idCardapio);
+            produto = new ProdutoDao().findById(idProduto);
+            
             itemCardapio = new ItemCardapio();
+            itemCardapio.setCardapio(cardapio);
+            itemCardapio.setProduto(produto);
             itemCardapio.setId(resultSet.getLong("id"));
             itemCardapio.setQuantidade(resultSet.getInt("quantidade"));
             itemCardapio.setPreco(resultSet.getDouble("preco"));

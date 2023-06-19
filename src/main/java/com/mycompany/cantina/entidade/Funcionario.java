@@ -8,7 +8,8 @@ package com.mycompany.cantina.entidade;
  *
  * @author patri
  */
-public class Funcionario extends Pessoa {
+public class Funcionario
+        extends Pessoa {
 
     private String funcao;
     private String chave;
@@ -19,7 +20,8 @@ public class Funcionario extends Pessoa {
     public Funcionario() {
     }
 
-    public Funcionario(String funcao, String chave, String senha, Boolean ativo) {
+    public Funcionario(String funcao, String chave, String senha, Boolean ativo, Long cpf, String nome, String endereco) {
+        super(cpf, nome, endereco);
         this.funcao = funcao;
         this.chave = chave;
         this.senha = senha;
@@ -61,14 +63,17 @@ public class Funcionario extends Pessoa {
     }
 
 //</editor-fold>
+    
+    
     @Override
     public String toString() {
         return "Funcionario{"
-                + "funcao=" + funcao
+                + super.toString()
+                + ", funcao=" + funcao
                 + ", chave=" + chave
                 + ", senha=" + senha
                 + ", ativo=" + ativo
-                + '}';
+                + '}' + '\n';
     }
 
 }

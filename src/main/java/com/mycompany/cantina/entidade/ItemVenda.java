@@ -65,11 +65,12 @@ public class ItemVenda
     @Override
     public String toString() {
         return "ItemVenda{"
-                + "produto=" + produto
+                + "id=" + getId()
+                + ", idProduto=" + produto.getId()
                 + ", venda=" + venda
                 + ", quantidade=" + quantidade
                 + ", preco=" + preco
-                + '}';
+                + '}' + '\n';
     }
 
 }

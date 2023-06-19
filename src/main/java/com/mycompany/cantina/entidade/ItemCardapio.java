@@ -26,6 +26,9 @@ public class ItemCardapio
         this.produto = produto;
         this.quantidade = quantidade;
         this.preco = preco;
+        
+        cardapio.adicionarItemCardapio(this);
+        produto.adicionarItemCardapio(this);
     }
 
 //</editor-fold>
@@ -67,11 +70,24 @@ public class ItemCardapio
     public String toString() {
         return "ItemCardapio{"
                 + "id=" + getId()
-//                + ", idCardapio=" + cardapio.getId()
-//                + ", idProduto=" + produto.getId()
+                + ", idCardapio=" + cardapio.getId()
+                + ", idProduto=" + produto.getId()
                 + ", quantidade=" + quantidade
                 + ", preco=" + preco
                 + '}' + '\n';
+        
+//        StringBuilder sb = new StringBuilder();
+//        sb.append("ItemCardapio{");
+//        sb.append("id=").append(super.getId());
+//        sb.append(", idCardapio=").append((getCardapio() == null ? "null, " : getCardapio().getId()));
+//        sb.append(", idProduto=").append((getProduto() == null ? "null, " : getProduto().getId()));
+//        sb.append(", quantidade=").append(getQuantidade());
+//        sb.append(", preco=").append(getPreco());
+//        sb.append('}');
+//        String s = sb.toString();
+//        s = s + "\n";
+//        return s;
+
     }
 
 }

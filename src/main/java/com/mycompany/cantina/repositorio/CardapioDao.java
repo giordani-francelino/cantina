@@ -34,7 +34,6 @@ public class CardapioDao
     public void composeSaveOrUpdateStatement(PreparedStatement pstmt, Cardapio e) {
         try
         {
-
             pstmt.setObject(1, e.getDescricao(), java.sql.Types.VARCHAR);
             pstmt.setObject(2, e.getValor(), java.sql.Types.DOUBLE);
 

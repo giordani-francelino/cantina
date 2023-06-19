@@ -97,14 +97,15 @@ public class Pagamento
     @Override
     public String toString() {
         return "Pagamento{"
-                + "dataPagamento=" + dataPagamento
+                + "id=" + getId()
+                + ", idVenda=" + venda.getId()
+                + ", dataPagamento=" + dataPagamento
                 + ", dataVencimento=" + dataVencimento
                 + ", valorPagamento=" + valorPagamento
                 + ", acrescimo=" + acrescimo
                 + ", desconto=" + desconto
-                + ", venda=" + venda
                 + ", tipoPagamento=" + tipoPagamento
-                + '}';
+                + '}' + '\n';
     }
 
 }
