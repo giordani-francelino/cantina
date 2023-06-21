@@ -23,21 +23,17 @@ public class FuncionarioDao extends
     @Override
     public String getSaveStatment() {
         return "insert into " + TABLE
-                + "(funcao, chave, senha, ativo, cpf, nome, endereco)"
-                + " values (?, ?, ?, ?, ?, ?, ?)";
+                + "(funcao, chave, senha, ativo) values (?, ?, ?, ?)";
     }
 
     @Override
     public String getUpdateStatment() {
         return "update " + TABLE
-                + " set funcao = ?, chave = ?, senha = ?, ativo = ?, cpf = ?, nome = ?, endereco = ?"
-                + " where id = ?";
+                + " set funcao = ?, chave = ?, senha = ?, ativo = ? where id = ?";
     }
 
     @Override
     public void composeSaveOrUpdateStatement(PreparedStatement pstmt, Funcionario e) {
-        ResultSet resultSet;
-
         try
         {
             pstmt.setObject(1, e.getFuncao(), java.sql.Types.VARCHAR);
@@ -45,13 +41,9 @@ public class FuncionarioDao extends
             pstmt.setObject(3, e.getSenha(), java.sql.Types.VARCHAR);
             pstmt.setObject(4, e.getAtivo(), java.sql.Types.BOOLEAN);
 
-            pstmt.setObject(5, e.getCpf(), java.sql.Types.BIGINT);
-            pstmt.setObject(6, e.getNome(), java.sql.Types.VARCHAR);
-            pstmt.setObject(7, e.getEndereco(), java.sql.Types.VARCHAR);
-
             if (e.getId() != null)
             {
-                pstmt.setObject(8, e.getId(), java.sql.Types.BIGINT);
+                pstmt.setObject(5, e.getId(), java.sql.Types.BIGINT);
             }
         } catch (SQLException ex)
         {
@@ -66,13 +58,13 @@ public class FuncionarioDao extends
 
     @Override
     public String getFindByIdStatment() {
-        return "select id, funcao, chave, senha, ativo, cpf, nome, endereco"
+        return "select id, funcao, chave, senha, ativo"
                 + " from " + TABLE + " where id = ?";
     }
 
     @Override
     public String getFindAllStatment() {
-        return "select id, funcao, chave, senha, ativo, cpf, nome, endereco"
+        return "select id, funcao, chave, senha, ativo"
                 + " from " + TABLE;
     }
 
@@ -89,10 +81,6 @@ public class FuncionarioDao extends
             funcionario.setChave(resultSet.getString("chave"));
             funcionario.setSenha(resultSet.getString("senha"));
             funcionario.setAtivo(resultSet.getBoolean("ativo"));
-
-            funcionario.setCpf(resultSet.getLong("cpf"));
-            funcionario.setNome(resultSet.getString("nome"));
-            funcionario.setEndereco(resultSet.getString("endereco"));
 
         } catch (SQLException ex)
         {

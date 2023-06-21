@@ -3,6 +3,7 @@
 drop table itemVenda;
 drop table itemcardapio;
 drop table funcionario;
+drop table cliente;
 drop table pagamento;
 drop table venda;
 drop table cardapio;
@@ -55,9 +56,14 @@ CREATE TABLE funcionario (
     `chave` varchar(20) NOT NULL,
     `senha` varchar(16) NOT NULL,
     `ativo` boolean NOT NULL,
-    `cpf` bigint(14) unsigned NOT NULL,
-    `nome` varchar(20) NOT NULL,
-    `endereco` varchar(100) NOT NULL,
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `id` (`id`),
+    FOREIGN KEY (`id`) REFERENCES `pessoa` (`id`)
+);
+
+CREATE TABLE cliente (
+    `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+    `especial` boolean NOT NULL,
     PRIMARY KEY (`id`),
     UNIQUE KEY `id` (`id`),
     FOREIGN KEY (`id`) REFERENCES `pessoa` (`id`)

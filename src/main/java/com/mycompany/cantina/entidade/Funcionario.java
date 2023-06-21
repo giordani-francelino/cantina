@@ -68,7 +68,8 @@ public class Funcionario
     @Override
     public String toString() {
         return "Funcionario{"
-                + super.toString()
+//                + super.toString()
+                + "id=" + getId()
                 + ", funcao=" + funcao
                 + ", chave=" + chave
                 + ", senha=" + senha

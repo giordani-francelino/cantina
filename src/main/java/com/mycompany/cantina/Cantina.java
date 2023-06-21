@@ -4,6 +4,7 @@
 package com.mycompany.cantina;
 
 import com.mycompany.cantina.entidade.Cardapio;
+import com.mycompany.cantina.entidade.Cliente;
 import com.mycompany.cantina.entidade.Funcionario;
 import com.mycompany.cantina.entidade.ItemCardapio;
 import com.mycompany.cantina.entidade.ItemVenda;
@@ -13,6 +14,7 @@ import com.mycompany.cantina.entidade.Produto;
 import com.mycompany.cantina.entidade.Venda;
 
 import com.mycompany.cantina.repositorio.CardapioDao;
+import com.mycompany.cantina.repositorio.ClienteDao;
 import com.mycompany.cantina.repositorio.FuncionarioDao;
 import com.mycompany.cantina.repositorio.ItemCardapioDao;
 import com.mycompany.cantina.repositorio.ItemVendaDao;
@@ -39,6 +41,8 @@ public class Cantina {
         Venda venda1 = new Venda(pessoa1, LocalDate.now());
         Funcionario funcionario1 = new Funcionario(
                 "Balcão", "123456-e", "123", true, pessoa1.getCpf(), pessoa1.getNome(), pessoa1.getEndereco());
+        Cliente cliente1 = new Cliente(false, pessoa1.getCpf(), pessoa1.getNome(), pessoa1.getEndereco());
+//        TODO: Implementar ENUM de Pagamento
         Pagamento pagamento1 = new Pagamento(
                 LocalDate.parse("2030-05-01"), LocalDate.now(), (double) 220, (double) 100, (double) 0.5, venda1, (int) 1);
         ItemVenda itemVenda1 = new ItemVenda(produto1, venda1, (int) 1200, (double) 650);
@@ -182,7 +186,7 @@ public class Cantina {
         itemVenda1.setId(idVenda1);
 
         itemVenda1 = new ItemVendaDao().findById(idItemVenda1);
-        System.out.println("idItemVenda >" + idItemVenda1);
+        System.out.println("> idItemVenda=" + idItemVenda1);
 
         List<ItemVenda> itemVendas = new ItemVendaDao().findAll();
         System.out.println(itemVendas);
@@ -191,6 +195,23 @@ public class Cantina {
         new ItemVendaDao().saveOrUpdate(itemVenda1);
 
 //        new ItemVendaDao().deleteById(idItemVenda1);
+//</editor-fold>
+        //<editor-fold defaultstate="collapsed" desc="CRUD Cliente (OK)">
+        System.out.println("\n== Cliente ==");
+        
+        Long idCliente1 = new ClienteDao().saveOrUpdate(cliente1);
+        cliente1.setId(idCliente1);
+        
+        cliente1 = new ClienteDao().findById(idCliente1);
+        System.out.println("> idCliente1=" + idCliente1);
+        
+        List<Cliente> clientes = new ClienteDao().findAll();
+        System.out.println(clientes);
+        
+        cliente1.setEspecial(false);
+        new ClienteDao().saveOrUpdate(cliente1);
+        
+        new ClienteDao().deleteById(idCliente1);
 //</editor-fold>
     }
 }
