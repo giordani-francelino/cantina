@@ -57,6 +57,7 @@ public class Principal extends javax.swing.JFrame {
         mnuArquivo = new javax.swing.JMenu();
         mnuCadastro = new javax.swing.JMenu();
         mnuCadastroUsuario = new javax.swing.JMenuItem();
+        mnuCadastroPessoa = new javax.swing.JMenuItem();
         mnuAdministrador = new javax.swing.JMenuItem();
         mnuSair = new javax.swing.JMenuItem();
         mnuAjuda = new javax.swing.JMenu();
@@ -76,7 +77,7 @@ public class Principal extends javax.swing.JFrame {
         dskPrincipal.setLayout(dskPrincipalLayout);
         dskPrincipalLayout.setHorizontalGroup(
             dskPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 688, Short.MAX_VALUE)
+            .addGap(0, 737, Short.MAX_VALUE)
         );
         dskPrincipalLayout.setVerticalGroup(
             dskPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -99,6 +100,14 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         mnuCadastro.add(mnuCadastroUsuario);
+
+        mnuCadastroPessoa.setText("Pessoa");
+        mnuCadastroPessoa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuCadastroPessoaActionPerformed(evt);
+            }
+        });
+        mnuCadastro.add(mnuCadastroPessoa);
 
         mnuArquivo.add(mnuCadastro);
 
@@ -140,7 +149,7 @@ public class Principal extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(scrPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, 628, Short.MAX_VALUE)
+                .addComponent(scrPrincipal)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -173,6 +182,11 @@ public class Principal extends javax.swing.JFrame {
         new Login().setVisible(true);
         dispose();
     }//GEN-LAST:event_mnuSairActionPerformed
+
+    private void mnuCadastroPessoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuCadastroPessoaActionPerformed
+        // TODO add your handling code here:
+        anexarJanela(CadastroPessoa.getInstance());
+    }//GEN-LAST:event_mnuCadastroPessoaActionPerformed
 
     private void anexarJanela(JInternalFrame janela) {
         if (!janela.isVisible()) {
@@ -213,6 +227,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenu mnuArquivo;
     private javax.swing.JMenuBar mnuBarra;
     private javax.swing.JMenu mnuCadastro;
+    private javax.swing.JMenuItem mnuCadastroPessoa;
     private javax.swing.JMenuItem mnuCadastroUsuario;
     private javax.swing.JMenuItem mnuSair;
     private javax.swing.JMenuItem mnuSobre;

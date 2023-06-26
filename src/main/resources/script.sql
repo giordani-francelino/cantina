@@ -50,15 +50,15 @@ CREATE TABLE itemCardapio (
     FOREIGN KEY (`idProduto`) REFERENCES `produto` (`id`)
 );
 
-CREATE TABLE Usuario (
-    `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-    `nome` varchar(40) NOT NULL,
-    `email` varchar(100) NOT NULL,
-    `senha` varchar(64) NOT NULL,
-    `administrador` boolean NOT NULL,
-    PRIMARY KEY (`id`),
-    UNIQUE KEY `id` (`id`)
-);
+ CREATE TABLE `usuario` (
+   `id` int(11) NOT NULL AUTO_INCREMENT,
+   `nome` varchar(55) NOT NULL,
+   `email` varchar(125) NOT NULL,
+   `senha` char(32) NOT NULL,
+   `administrador` tinyint(1) DEFAULT '0',
+   PRIMARY KEY (`id`),
+   UNIQUE KEY `email` (`email`)
+  ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1
 
 CREATE TABLE cliente (
     `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,

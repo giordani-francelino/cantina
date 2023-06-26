@@ -61,7 +61,7 @@ public class PessoaDao
     @Override
     public String getFindAllStatment() {
         return "select id, cpf, nome, endereco"
-                + " from " + TABLE;
+                + " from " + TABLE + " order by nome";
     }
 
     @Override

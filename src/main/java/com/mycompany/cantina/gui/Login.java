@@ -8,6 +8,8 @@ package com.mycompany.cantina.gui;
 
 import com.mycompany.cantina.entidade.Usuario;
 import com.mycompany.cantina.repositorio.UsuarioDao;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.UIManager;
 
 /**
@@ -22,6 +24,9 @@ public class Login extends javax.swing.JFrame {
      */
     public Login() {
         initComponents();
+        pwdSenha.setText("admin");
+        txtUsuario.setText("admin@mail.com");
+
         // Centralização da janela
         setLocationRelativeTo(null);
     }
@@ -160,7 +165,7 @@ public class Login extends javax.swing.JFrame {
         usuario.setSenha(String.valueOf(pwdSenha.getPassword()));
 
         Usuario usuarioAutenticado = new UsuarioDao().autenticar(usuario);
-        
+
         if (usuarioAutenticado != null) {
             System.out.println(">> Autenticado: " + usuarioAutenticado);
             new Principal(usuarioAutenticado).setVisible(true);
@@ -186,10 +191,19 @@ public class Login extends javax.swing.JFrame {
         } catch (Exception ex) {
             System.err.println("Failed to initialize LaF");
         }
-        
+
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+
+                List<Usuario> usuarios = new ArrayList<Usuario>();
+                usuarios = new UsuarioDao().findAll();
+                if (usuarios == null) {
+                    Usuario usuarioA = new Usuario(null, "admin", "admin@mail.com", "admin", true);
+                    new UsuarioDao().salvar(usuarioA);
+                    System.out.println(">> Novo usuário ADMIN inserido no banco de dados");
+                }
+
                 new Login().setVisible(true);
             }
         });
