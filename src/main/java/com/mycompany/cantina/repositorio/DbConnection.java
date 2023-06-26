@@ -89,3 +89,6 @@ public class DbConnection {
         return connection;
     }
 }
+
+
+//"jdbc:mysql://127.0.0.1:3306/Cantina?useUnicode=true&useJDBCCompliantTimezoneShift=true&serverTimezone=UTC&autoReconnect=true"

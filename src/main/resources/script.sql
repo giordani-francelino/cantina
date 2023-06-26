@@ -50,15 +50,14 @@ CREATE TABLE itemCardapio (
     FOREIGN KEY (`idProduto`) REFERENCES `produto` (`id`)
 );
 
-CREATE TABLE funcionario (
+CREATE TABLE Usuario (
     `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-    `funcao` varchar(20) NOT NULL,
-    `chave` varchar(20) NOT NULL,
-    `senha` varchar(16) NOT NULL,
-    `ativo` boolean NOT NULL,
+    `nome` varchar(40) NOT NULL,
+    `email` varchar(100) NOT NULL,
+    `senha` varchar(64) NOT NULL,
+    `administrador` boolean NOT NULL,
     PRIMARY KEY (`id`),
-    UNIQUE KEY `id` (`id`),
-    FOREIGN KEY (`id`) REFERENCES `pessoa` (`id`)
+    UNIQUE KEY `id` (`id`)
 );
 
 CREATE TABLE cliente (

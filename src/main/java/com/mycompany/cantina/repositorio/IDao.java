@@ -74,4 +74,6 @@ public interface IDao<T> {
 
     public List<T> extractObjects(ResultSet resultSet);
 
+    public Long salvar(T o);
+
 }

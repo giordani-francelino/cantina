@@ -4,23 +4,21 @@
 package com.mycompany.cantina;
 
 import com.mycompany.cantina.entidade.Cardapio;
-import com.mycompany.cantina.entidade.Cliente;
-import com.mycompany.cantina.entidade.Funcionario;
 import com.mycompany.cantina.entidade.ItemCardapio;
 import com.mycompany.cantina.entidade.ItemVenda;
 import com.mycompany.cantina.entidade.Pagamento;
 import com.mycompany.cantina.entidade.Pessoa;
 import com.mycompany.cantina.entidade.Produto;
+import com.mycompany.cantina.entidade.Usuario;
 import com.mycompany.cantina.entidade.Venda;
 
 import com.mycompany.cantina.repositorio.CardapioDao;
-import com.mycompany.cantina.repositorio.ClienteDao;
-import com.mycompany.cantina.repositorio.FuncionarioDao;
 import com.mycompany.cantina.repositorio.ItemCardapioDao;
 import com.mycompany.cantina.repositorio.ItemVendaDao;
 import com.mycompany.cantina.repositorio.PagamentoDao;
 import com.mycompany.cantina.repositorio.PessoaDao;
 import com.mycompany.cantina.repositorio.ProdutoDao;
+import com.mycompany.cantina.repositorio.UsuarioDao;
 import com.mycompany.cantina.repositorio.VendaDao;
 
 import java.time.LocalDate;
@@ -39,9 +37,6 @@ public class Cantina {
         ItemCardapio itemCardapio1 = new ItemCardapio(cardapio1, produto1, 100, (double) 300);
         Pessoa pessoa1 = new Pessoa(70205341464l, "Ana Zaira", "Rua amendoim, 210, cs, JK - Moc");
         Venda venda1 = new Venda(pessoa1, LocalDate.now());
-        Funcionario funcionario1 = new Funcionario(
-                "Balcão", "123456-e", "123", true, pessoa1.getCpf(), pessoa1.getNome(), pessoa1.getEndereco());
-        Cliente cliente1 = new Cliente(false, pessoa1.getCpf(), pessoa1.getNome(), pessoa1.getEndereco());
 //        TODO: Implementar ENUM de Pagamento
         Pagamento pagamento1 = new Pagamento(
                 LocalDate.parse("2030-05-01"), LocalDate.now(), (double) 220, (double) 100, (double) 0.5, venda1, (int) 1);
@@ -148,17 +143,6 @@ public class Cantina {
         //<editor-fold defaultstate="collapsed" desc="CRUD Pessoa (OK)">
         System.out.println("\n== Funcionario ==");
 
-        Long idFuncionario1 = new FuncionarioDao().saveOrUpdate(funcionario1);
-        funcionario1.setId(idFuncionario1);
-
-        funcionario1 = new FuncionarioDao().findById(idFuncionario1);
-        System.out.println("> idFuncionario=" + idFuncionario1);
-
-        List<Funcionario> funcionarios = new FuncionarioDao().findAll();
-        System.out.println(funcionarios);
-
-        funcionario1.setAtivo(false);
-        new FuncionarioDao().saveOrUpdate(funcionario1);
 
 //        new FuncionarioDao().deleteById(idVenda);
         //</editor-fold>
@@ -196,22 +180,28 @@ public class Cantina {
 
 //        new ItemVendaDao().deleteById(idItemVenda1);
 //</editor-fold>
-        //<editor-fold defaultstate="collapsed" desc="CRUD Cliente (OK)">
-        System.out.println("\n== Cliente ==");
+        //
+        Usuario usuarioA = new Usuario(null, "Guisso", "guisso@mail.com", "123456", true);
+        new UsuarioDao().salvar(usuarioA);
+        System.out.println(">> Novo usuário ADMIN inserido no banco de dados");
         
-        Long idCliente1 = new ClienteDao().saveOrUpdate(cliente1);
-        cliente1.setId(idCliente1);
+        Usuario usuarioB = new Usuario(null, "Comum", "comum@mail.com", "123456", false);
+        new UsuarioDao().salvar(usuarioB);
+        System.out.println(">> Novo usuário COMUM inserido no banco de dados");
         
-        cliente1 = new ClienteDao().findById(idCliente1);
-        System.out.println("> idCliente1=" + idCliente1);
+        //
+        // Autenticação de usuário
+        //
+        Usuario usuarioC = new Usuario();
+        usuarioC.setEmail("guisso@mail.com");
+        usuarioC.setSenha("123456");
         
-        List<Cliente> clientes = new ClienteDao().findAll();
-        System.out.println(clientes);
+        Usuario usuarioAutenticado = new UsuarioDao().autenticar(usuarioC);
+        if(usuarioAutenticado != null) {
+            System.out.println(">> Autenticado: " + usuarioAutenticado);
+        } else {
+            System.out.println(">> Não autenticado.");
+        }
         
-        cliente1.setEspecial(false);
-        new ClienteDao().saveOrUpdate(cliente1);
-        
-        new ClienteDao().deleteById(idCliente1);
-//</editor-fold>
     }
 }
