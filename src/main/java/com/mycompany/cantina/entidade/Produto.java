@@ -14,7 +14,6 @@ public class Produto
         extends Entidade {
 
     ArrayList<ItemVenda> itensVendas;
-    ArrayList<ItemCardapio> itensCardapios;
 
     private String descricao;
     private Double preco;
@@ -22,7 +21,6 @@ public class Produto
     //<editor-fold defaultstate="collapsed" desc="Construtores">
     public Produto() {
         itensVendas = new ArrayList<>();
-        itensCardapios = new ArrayList<>();
     }
 
     public Produto(String descricao, Double preco) {
@@ -66,24 +64,12 @@ public class Produto
         this.itensVendas = itens;
     }
 
-    public ArrayList<ItemCardapio> getCardapios() {
-        return itensCardapios;
-    }
-
-    public void setCardapios(ArrayList<ItemCardapio> cardapios) {
-        this.itensCardapios = cardapios;
-    }
 
 //</editor-fold>
     //<editor-fold defaultstate="collapsed" desc="Adiciona item (VENDA e CARDÁPIO">
     public void adicionarItemVenda(ItemVenda itemVenda) {
         itensVendas.add(itemVenda);
         itemVenda.setProduto(this);
-    }
-
-    public void adicionarItemCardapio(ItemCardapio itemCardapio) {
-        itensCardapios.add(itemCardapio);
-        itemCardapio.setProduto(this);
     }
 
 //</editor-fold>

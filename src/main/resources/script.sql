@@ -1,24 +1,12 @@
 -- DELETANDO TODAS AS TABELAS TODAS AS TABELAS
 
 drop table itemVenda;
-drop table itemcardapio;
-drop table funcionario;
-drop table cliente;
 drop table pagamento;
 drop table venda;
-drop table cardapio;
 drop table produto;
 drop tabLe pessoa;
 
 -- CRIANDO AS TABELAS
-
-CREATE TABLE cardapio (
-    `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-    `descricao` varchar(50) NOT NULL,
-    `valor` double NOT NULL,
-    PRIMARY KEY (`id`),
-    UNIQUE KEY `id` (`id`)
-);
 
 CREATE TABLE produto (
     `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
@@ -37,18 +25,6 @@ CREATE TABLE pessoa (
     UNIQUE KEY `id` (`id`)
 );
 
-CREATE TABLE itemCardapio (
-    `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-    `idCardapio` bigint(20) unsigned NOT NULL,
-    `idProduto` bigint(20) unsigned NOT NULL,
-    `quantidade` int NOT NULL,
-    `preco` double NOT NULL,
-    PRIMARY KEY (`id`),
-    UNIQUE KEY `id` (`id`),
-    UNIQUE KEY `idCardapio_idProduto` (`idCardapio`, `idProduto`),
-    FOREIGN KEY (`idCardapio`) REFERENCES `cardapio` (`id`),
-    FOREIGN KEY (`idProduto`) REFERENCES `produto` (`id`)
-);
 
  CREATE TABLE `usuario` (
    `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -60,13 +36,6 @@ CREATE TABLE itemCardapio (
    UNIQUE KEY `email` (`email`)
   ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1
 
-CREATE TABLE cliente (
-    `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-    `especial` boolean NOT NULL,
-    PRIMARY KEY (`id`),
-    UNIQUE KEY `id` (`id`),
-    FOREIGN KEY (`id`) REFERENCES `pessoa` (`id`)
-);
 
 CREATE TABLE venda (
     `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
