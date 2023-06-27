@@ -16,13 +16,14 @@ public class Venda
 
     private LocalDate dataVenda;
 
-    ArrayList<Pagamento> pagamentos;
-    ArrayList<ItemVenda> itensVendas;
+    private ArrayList<Pagamento> pagamentos;
+    private ArrayList<ItemVenda> itensVendas;
 
     private Pessoa pessoa;
 
     //<editor-fold defaultstate="collapsed" desc="Construtores">
     public Venda() {
+        pessoa = new Pessoa();
         pagamentos = new ArrayList<>();
         itensVendas = new ArrayList<>();
     }
@@ -35,6 +36,8 @@ public class Venda
 
 //</editor-fold>
     //<editor-fold defaultstate="collapsed" desc="Getters / Setters">
+ 
+    
     public LocalDate getDataVenda() {
         return dataVenda;
     }
@@ -97,7 +100,7 @@ public class Venda
                 + ", pagamentos=" + pagamentos
                 + ", itensVendas=" + itensVendas
                 + '}' + '\n';
-        
+
 //        StringBuilder sb = new StringBuilder();
 //        sb.append("Venda{");
 //        sb.append("id=").append(super.getId());

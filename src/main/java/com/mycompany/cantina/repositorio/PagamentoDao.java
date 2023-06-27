@@ -104,6 +104,8 @@ public class PagamentoDao
         } catch (SQLException ex)
         {
             Logger.getLogger(PagamentoDao.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(PagamentoDao.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         return pagamento;

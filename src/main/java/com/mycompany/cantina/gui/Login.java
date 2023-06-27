@@ -10,6 +10,8 @@ import com.mycompany.cantina.entidade.Usuario;
 import com.mycompany.cantina.repositorio.UsuarioDao;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.UIManager;
 
 /**
@@ -196,14 +198,18 @@ public class Login extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
 
-                List<Usuario> usuarios = new ArrayList<Usuario>();
-                usuarios = new UsuarioDao().findAll();
-                if (usuarios == null) {
-                    Usuario usuarioA = new Usuario(null, "admin", "admin@mail.com", "admin", true);
-                    new UsuarioDao().salvar(usuarioA);
-                    System.out.println(">> Novo usuário ADMIN inserido no banco de dados");
-                }
+                try {
+                    List<Usuario> usuarios = new ArrayList<Usuario>();
+                    usuarios = new UsuarioDao().findAll();
+                    if (usuarios == null) {
+                        Usuario usuarioA = new Usuario(null, "admin", "admin@mail.com", "admin", true);
+                        new UsuarioDao().salvar(usuarioA);
+                        System.out.println(">> Novo usuário ADMIN inserido no banco de dados");
+                    }
 
+                } catch (Exception ex) {
+                    Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 new Login().setVisible(true);
             }
         });

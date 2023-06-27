@@ -85,6 +85,8 @@ public class VendaDao
         } catch (SQLException ex)
         {
             Logger.getLogger(VendaDao.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(VendaDao.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         return venda;

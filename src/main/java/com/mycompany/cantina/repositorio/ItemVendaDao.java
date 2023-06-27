@@ -90,6 +90,8 @@ public class ItemVendaDao
         } catch (SQLException ex)
         {
             Logger.getLogger(ItemVendaDao.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(ItemVendaDao.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         return itemVenda;

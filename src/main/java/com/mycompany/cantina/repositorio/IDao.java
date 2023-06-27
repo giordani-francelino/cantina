@@ -53,16 +53,16 @@ public interface IDao<T> {
 
     public void composeSaveOrUpdateStatement(PreparedStatement pstmt, T e);
 
-    public Long saveOrUpdate(T e);
+    public Long saveOrUpdate(T e) throws Exception;
 
     public String getDeleteByIdStatment();
 
-    public boolean deleteById(Long id);
+    public boolean deleteById(Long id) throws Exception;
 
     // Get by ID
     public String getFindByIdStatment();
 
-    public T findById(Long id);
+    public T findById(Long id) throws Exception;
 
     // Get all
     public String getFindAllStatment();

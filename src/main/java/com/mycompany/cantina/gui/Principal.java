@@ -51,6 +51,7 @@ public class Principal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jMenu1 = new javax.swing.JMenu();
         scrPrincipal = new javax.swing.JScrollPane();
         dskPrincipal = new javax.swing.JDesktopPane();
         mnuBarra = new javax.swing.JMenuBar();
@@ -58,10 +59,13 @@ public class Principal extends javax.swing.JFrame {
         mnuCadastro = new javax.swing.JMenu();
         mnuCadastroUsuario = new javax.swing.JMenuItem();
         mnuCadastroPessoa = new javax.swing.JMenuItem();
+        mnuProduto = new javax.swing.JMenuItem();
         mnuAdministrador = new javax.swing.JMenuItem();
         mnuSair = new javax.swing.JMenuItem();
         mnuAjuda = new javax.swing.JMenu();
         mnuSobre = new javax.swing.JMenuItem();
+
+        jMenu1.setText("jMenu1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sistema");
@@ -81,7 +85,7 @@ public class Principal extends javax.swing.JFrame {
         );
         dskPrincipalLayout.setVerticalGroup(
             dskPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 358, Short.MAX_VALUE)
+            .addGap(0, 365, Short.MAX_VALUE)
         );
 
         scrPrincipal.setViewportView(dskPrincipal);
@@ -108,6 +112,14 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         mnuCadastro.add(mnuCadastroPessoa);
+
+        mnuProduto.setText("Produto");
+        mnuProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuProdutoActionPerformed(evt);
+            }
+        });
+        mnuCadastro.add(mnuProduto);
 
         mnuArquivo.add(mnuCadastro);
 
@@ -154,9 +166,9 @@ public class Principal extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(scrPrincipal)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(scrPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -187,6 +199,11 @@ public class Principal extends javax.swing.JFrame {
         // TODO add your handling code here:
         anexarJanela(CadastroPessoa.getInstance());
     }//GEN-LAST:event_mnuCadastroPessoaActionPerformed
+
+    private void mnuProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuProdutoActionPerformed
+        // TODO add your handling code here:
+        anexarJanela(CadastroProduto.getInstance());
+    }//GEN-LAST:event_mnuProdutoActionPerformed
 
     private void anexarJanela(JInternalFrame janela) {
         if (!janela.isVisible()) {
@@ -222,6 +239,7 @@ public class Principal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane dskPrincipal;
+    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuItem mnuAdministrador;
     private javax.swing.JMenu mnuAjuda;
     private javax.swing.JMenu mnuArquivo;
@@ -229,6 +247,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenu mnuCadastro;
     private javax.swing.JMenuItem mnuCadastroPessoa;
     private javax.swing.JMenuItem mnuCadastroUsuario;
+    private javax.swing.JMenuItem mnuProduto;
     private javax.swing.JMenuItem mnuSair;
     private javax.swing.JMenuItem mnuSobre;
     private javax.swing.JScrollPane scrPrincipal;
