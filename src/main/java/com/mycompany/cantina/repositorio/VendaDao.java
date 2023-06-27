@@ -4,12 +4,15 @@
  */
 package com.mycompany.cantina.repositorio;
 
+import com.mycompany.cantina.entidade.Pagamento;
 import com.mycompany.cantina.entidade.Pessoa;
 import com.mycompany.cantina.entidade.Venda;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -34,17 +37,14 @@ public class VendaDao
 
     @Override
     public void composeSaveOrUpdateStatement(PreparedStatement pstmt, Venda e) {
-        try
-        {
+        try {
             pstmt.setObject(1, e.getPessoa().getId(), java.sql.Types.BIGINT);
             pstmt.setObject(2, e.getDataVenda(), java.sql.Types.DATE);
 
-            if (e.getId() != null)
-            {
+            if (e.getId() != null) {
                 pstmt.setObject(3, e.getId(), java.sql.Types.BIGINT);
             }
-        } catch (SQLException ex)
-        {
+        } catch (SQLException ex) {
             Logger.getLogger(VendaDao.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -71,25 +71,50 @@ public class VendaDao
         Venda venda = null;
         Pessoa pessoa = null;
 
-        try
-        {
+        try {
             Long idPessoa = resultSet.getLong("idPessoa");
-            
+
             pessoa = new PessoaDao().findById(idPessoa);
-            
+
             venda = new Venda();
             venda.setPessoa(pessoa);
             venda.setId(resultSet.getLong("id"));
             venda.setDataVenda(
                     resultSet.getObject("dataVenda", LocalDate.class));
-        } catch (SQLException ex)
-        {
+        } catch (SQLException ex) {
             Logger.getLogger(VendaDao.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {
             Logger.getLogger(VendaDao.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         return venda;
+    }
+
+
+
+    public List<Pagamento> localizarPagamentosPorIdVenda(Venda venda) {
+
+        try (PreparedStatement preparedStatement
+                = DbConnection.getConnection().prepareStatement(
+                        "select id, idVenda, dataPagamento, dataVencimento, valorPagamento"
+                + ", acrescimo, desconto, tipoPagamento"
+                + " from Pagamento where idVenda = ?")) {
+            preparedStatement.setObject(1, venda.getId(), java.sql.Types.BIGINT);
+
+            // Show the full sentence
+            System.out.println(">> SQL: " + preparedStatement);
+
+            // Performs the query on the database
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            // Returns the respective object
+            return new PagamentoDao().extractObjects(resultSet);
+
+        } catch (Exception ex) {
+            System.out.println("Exception: " + ex);
+        }
+
+        return null;
     }
 
 }
