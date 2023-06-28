@@ -79,7 +79,7 @@ public class CadastroVenda extends javax.swing.JInternalFrame {
 
         setClosable(true);
         setIconifiable(true);
-        setTitle("Cadastro de Pessoa");
+        setTitle("Cadastro de Venda");
 
         btnInserir.setText("Inserir");
         btnInserir.addActionListener(new java.awt.event.ActionListener() {

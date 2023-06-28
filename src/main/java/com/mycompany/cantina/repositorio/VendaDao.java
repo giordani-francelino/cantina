@@ -4,6 +4,7 @@
  */
 package com.mycompany.cantina.repositorio;
 
+import com.mycompany.cantina.entidade.ItemVenda;
 import com.mycompany.cantina.entidade.Pagamento;
 import com.mycompany.cantina.entidade.Pessoa;
 import com.mycompany.cantina.entidade.Venda;
@@ -116,5 +117,29 @@ public class VendaDao
 
         return null;
     }
+
+    public List<ItemVenda> localizarItemVendasPorIdVenda(Venda venda) {
+
+        try (PreparedStatement preparedStatement
+                = DbConnection.getConnection().prepareStatement(
+                        "select id, idProduto, idVenda, quantidade, preco from itemVenda where idVenda = ?")) {
+            preparedStatement.setObject(1, venda.getId(), java.sql.Types.BIGINT);
+
+            // Show the full sentence
+            System.out.println(">> SQL: " + preparedStatement);
+
+            // Performs the query on the database
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            // Returns the respective object
+            return new ItemVendaDao().extractObjects(resultSet);
+
+        } catch (Exception ex) {
+            System.out.println("Exception: " + ex);
+        }
+
+        return null;
+    }
+
 
 }

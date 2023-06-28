@@ -62,6 +62,7 @@ public class Principal extends javax.swing.JFrame {
         mnuCadastroPessoa = new javax.swing.JMenuItem();
         mnuProduto = new javax.swing.JMenuItem();
         mnuCadstroVenda = new javax.swing.JMenuItem();
+        mnuItemVenda = new javax.swing.JMenuItem();
         mnuPagamento = new javax.swing.JMenuItem();
         mnuAdministrador = new javax.swing.JMenuItem();
         mnuSair = new javax.swing.JMenuItem();
@@ -132,6 +133,14 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         mnuCadastro.add(mnuCadstroVenda);
+
+        mnuItemVenda.setText("Item vendido");
+        mnuItemVenda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuItemVendaActionPerformed(evt);
+            }
+        });
+        mnuCadastro.add(mnuItemVenda);
 
         mnuPagamento.setText("Pagamento");
         mnuPagamento.addActionListener(new java.awt.event.ActionListener() {
@@ -236,6 +245,12 @@ public class Principal extends javax.swing.JFrame {
         anexarJanela(CadastroPagamento.getInstance());
     }//GEN-LAST:event_mnuPagamentoActionPerformed
 
+    private void mnuItemVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuItemVendaActionPerformed
+        // TODO add your handling code here:
+                anexarJanela(CadastroItemVenda.getInstance());
+
+    }//GEN-LAST:event_mnuItemVendaActionPerformed
+
     private void anexarJanela(JInternalFrame janela) {
         if (!janela.isVisible()) {
             dskPrincipal.add(janela);
@@ -279,6 +294,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem mnuCadastroPessoa;
     private javax.swing.JMenuItem mnuCadastroUsuario;
     private javax.swing.JMenuItem mnuCadstroVenda;
+    private javax.swing.JMenuItem mnuItemVenda;
     private javax.swing.JMenuItem mnuPagamento;
     private javax.swing.JMenuItem mnuProduto;
     private javax.swing.JMenuItem mnuSair;
