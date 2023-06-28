@@ -23,6 +23,7 @@ public class Principal extends javax.swing.JFrame {
 
     /**
      * Creates new form Principal
+     *
      * @param usuarioSistema Dados do usuário para personalização da UI
      */
     public Principal(Usuario usuarioSistema) {
@@ -34,7 +35,7 @@ public class Principal extends javax.swing.JFrame {
 //        System.out.println("admin? " + usuarioSistema.getAdministrador());
         mnuAdministrador.setEnabled(usuarioSistema.getAdministrador());
         mnuCadastroUsuario.setEnabled(usuarioSistema.getAdministrador());
-        
+
         // Personalização do título da janela
         setTitle("Sistema :: " + usuarioSistema.getNome());
 
@@ -60,6 +61,7 @@ public class Principal extends javax.swing.JFrame {
         mnuCadastroUsuario = new javax.swing.JMenuItem();
         mnuCadastroPessoa = new javax.swing.JMenuItem();
         mnuProduto = new javax.swing.JMenuItem();
+        mnuCadstroVenda = new javax.swing.JMenuItem();
         mnuAdministrador = new javax.swing.JMenuItem();
         mnuSair = new javax.swing.JMenuItem();
         mnuAjuda = new javax.swing.JMenu();
@@ -120,6 +122,14 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         mnuCadastro.add(mnuProduto);
+
+        mnuCadstroVenda.setText("Venda");
+        mnuCadstroVenda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuCadstroVendaActionPerformed(evt);
+            }
+        });
+        mnuCadastro.add(mnuCadstroVenda);
 
         mnuArquivo.add(mnuCadastro);
 
@@ -205,6 +215,12 @@ public class Principal extends javax.swing.JFrame {
         anexarJanela(CadastroProduto.getInstance());
     }//GEN-LAST:event_mnuProdutoActionPerformed
 
+    private void mnuCadstroVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuCadstroVendaActionPerformed
+        // TODO add your handling code here:
+        anexarJanela(CadastroVenda.getInstance());
+
+    }//GEN-LAST:event_mnuCadstroVendaActionPerformed
+
     private void anexarJanela(JInternalFrame janela) {
         if (!janela.isVisible()) {
             dskPrincipal.add(janela);
@@ -247,6 +263,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenu mnuCadastro;
     private javax.swing.JMenuItem mnuCadastroPessoa;
     private javax.swing.JMenuItem mnuCadastroUsuario;
+    private javax.swing.JMenuItem mnuCadstroVenda;
     private javax.swing.JMenuItem mnuProduto;
     private javax.swing.JMenuItem mnuSair;
     private javax.swing.JMenuItem mnuSobre;

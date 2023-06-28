@@ -20,6 +20,9 @@ public class Pagamento
     private Double desconto;
     private Venda venda;
     private Integer tipoPagamento;
+    public enum TipoPagamento {
+        DINHEIRO, CARTAO, PIX
+    }
 
     //<editor-fold defaultstate="collapsed" desc="Construtores">
     public Pagamento() {

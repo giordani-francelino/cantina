@@ -4,10 +4,13 @@
  */
 package com.mycompany.cantina.repositorio;
 
+import com.mycompany.cantina.entidade.Pagamento;
 import com.mycompany.cantina.entidade.Pessoa;
+import com.mycompany.cantina.entidade.Venda;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -82,4 +85,29 @@ public class PessoaDao
 
         return pessoa;
     }
+        public List<Venda> localizarVendasPorIdPessoa(Pessoa pessoa) {
+
+        try (PreparedStatement preparedStatement
+                = DbConnection.getConnection().prepareStatement(
+                        "select id, idPessoa, dataVenda"
+                + " from Venda  where idPessoa = ? order by dataVenda")) {
+            preparedStatement.setObject(1, pessoa.getId(), java.sql.Types.BIGINT);
+
+            // Show the full sentence
+            System.out.println(">> SQL: " + preparedStatement);
+
+            // Performs the query on the database
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            // Returns the respective object
+            return new VendaDao().extractObjects(resultSet);
+
+        } catch (Exception ex) {
+            System.out.println("Exception: " + ex);
+        }
+
+        return null;
+    }
+
+    
 }
