@@ -62,6 +62,7 @@ public class Principal extends javax.swing.JFrame {
         mnuCadastroPessoa = new javax.swing.JMenuItem();
         mnuProduto = new javax.swing.JMenuItem();
         mnuCadstroVenda = new javax.swing.JMenuItem();
+        mnuPagamento = new javax.swing.JMenuItem();
         mnuAdministrador = new javax.swing.JMenuItem();
         mnuSair = new javax.swing.JMenuItem();
         mnuAjuda = new javax.swing.JMenu();
@@ -87,7 +88,7 @@ public class Principal extends javax.swing.JFrame {
         );
         dskPrincipalLayout.setVerticalGroup(
             dskPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 365, Short.MAX_VALUE)
+            .addGap(0, 493, Short.MAX_VALUE)
         );
 
         scrPrincipal.setViewportView(dskPrincipal);
@@ -99,7 +100,8 @@ public class Principal extends javax.swing.JFrame {
         mnuCadastro.setText("Cadastro");
 
         mnuCadastroUsuario.setMnemonic('u');
-        mnuCadastroUsuario.setText("Usuario");
+        mnuCadastroUsuario.setText("Usuário");
+        mnuCadastroUsuario.setToolTipText("");
         mnuCadastroUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mnuCadastroUsuarioActionPerformed(evt);
@@ -130,6 +132,14 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         mnuCadastro.add(mnuCadstroVenda);
+
+        mnuPagamento.setText("Pagamento");
+        mnuPagamento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuPagamentoActionPerformed(evt);
+            }
+        });
+        mnuCadastro.add(mnuPagamento);
 
         mnuArquivo.add(mnuCadastro);
 
@@ -176,10 +186,10 @@ public class Principal extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(scrPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(scrPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 493, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -220,6 +230,11 @@ public class Principal extends javax.swing.JFrame {
         anexarJanela(CadastroVenda.getInstance());
 
     }//GEN-LAST:event_mnuCadstroVendaActionPerformed
+
+    private void mnuPagamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuPagamentoActionPerformed
+        // TODO add your handling code here:CadastroPagamento
+        anexarJanela(CadastroPagamento.getInstance());
+    }//GEN-LAST:event_mnuPagamentoActionPerformed
 
     private void anexarJanela(JInternalFrame janela) {
         if (!janela.isVisible()) {
@@ -264,6 +279,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem mnuCadastroPessoa;
     private javax.swing.JMenuItem mnuCadastroUsuario;
     private javax.swing.JMenuItem mnuCadstroVenda;
+    private javax.swing.JMenuItem mnuPagamento;
     private javax.swing.JMenuItem mnuProduto;
     private javax.swing.JMenuItem mnuSair;
     private javax.swing.JMenuItem mnuSobre;

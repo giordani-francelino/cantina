@@ -28,7 +28,8 @@
                 <MenuItem class="javax.swing.JMenuItem" name="mnuCadastroUsuario">
                   <Properties>
                     <Property name="mnemonic" type="int" value="117"/>
-                    <Property name="text" type="java.lang.String" value="Usuario"/>
+                    <Property name="text" type="java.lang.String" value="Usu&#xe1;rio"/>
+                    <Property name="toolTipText" type="java.lang.String" value=""/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnuCadastroUsuarioActionPerformed"/>
@@ -56,6 +57,14 @@
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnuCadstroVendaActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="mnuPagamento">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Pagamento"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnuPagamentoActionPerformed"/>
                   </Events>
                 </MenuItem>
               </SubComponents>
@@ -131,10 +140,10 @@
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="1" attributes="0">
-              <EmptySpace max="32767" attributes="0"/>
-              <Component id="scrPrincipal" min="-2" max="-2" attributes="0"/>
+          <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
+              <Component id="scrPrincipal" min="-2" pref="493" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -171,7 +180,7 @@
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="365" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="493" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
           </Layout>

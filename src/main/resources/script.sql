@@ -49,7 +49,7 @@ CREATE TABLE venda (
 CREATE TABLE pagamento (
     `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
     `idVenda` bigint(20) unsigned NOT NULL,
-    `dataPagamento` date NOT NULL,
+    `dataPagamento` date,
     `dataVencimento` date NOT NULL,
     `valorPagamento` double NOT NULL,
     `acrescimo` double NOT NULL,

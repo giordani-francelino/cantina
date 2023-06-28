@@ -21,7 +21,7 @@ public class Pagamento
     private Venda venda;
     private Integer tipoPagamento;
     public enum TipoPagamento {
-        DINHEIRO, CARTAO, PIX
+        CARTAO, DINHEIRO, PIX
     }
 
     //<editor-fold defaultstate="collapsed" desc="Construtores">
