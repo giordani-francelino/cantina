@@ -60,6 +60,7 @@ CREATE TABLE pagamento (
     FOREIGN KEY (`id`) REFERENCES `venda` (`id`)
 );
 
+drop table itemVenda;
 CREATE TABLE itemVenda (
     `id` bigInt(20) unsigned NOT NULL AUTO_INCREMENT,
     `idProduto` bigInt(20) unsigned NOT NULL,
@@ -68,7 +69,8 @@ CREATE TABLE itemVenda (
     `preco` double NOT NULL,
     PRIMARY KEY (`id`),
     UNIQUE KEY `id` (`id`),
-    UNIQUE KEY `idProduto_idVenda` (`idProduto`, `idVenda`),
     FOREIGN KEY (`idProduto`) REFERENCES `produto` (`id`),
     FOREIGN KEY (`idVenda`) REFERENCES `venda` (`id`)
 );
+
+    UNIQUE KEY `idProduto_idVenda` (`idProduto`, `idVenda`),

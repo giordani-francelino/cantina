@@ -14,6 +14,7 @@ import com.mycompany.cantina.entidade.Venda;
 import com.mycompany.cantina.repositorio.ItemVendaDao;
 import com.mycompany.cantina.repositorio.ProdutoDao;
 import com.mycompany.cantina.repositorio.VendaDao;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
@@ -373,8 +374,11 @@ public class CadastroItemVenda extends javax.swing.JInternalFrame {
             comboBoxModelProduto.addAll(new ProdutoDao().findAll());
             cmbSelecionaProduto.setModel(comboBoxModelProduto);
 
+            List<ItemVenda> itemVendas = new VendaDao().localizarItemVendasPorIdVenda(venda);
             DefaultComboBoxModel<ItemVenda> comboBoxModelItemVenda = new DefaultComboBoxModel<>();
-            comboBoxModelItemVenda.addAll(new VendaDao().localizarItemVendasPorIdVenda(venda));
+            if (itemVendas != null) {
+                comboBoxModelItemVenda.addAll(itemVendas);
+            }
             cmbSelecionaItemVenda.setModel(comboBoxModelItemVenda);
 
         } catch (Exception ex) {
@@ -388,6 +392,7 @@ public class CadastroItemVenda extends javax.swing.JInternalFrame {
             txtPreco.setText("0");
             txtQuantidade.setText("0");
             cmbSelecionaProduto.setSelectedIndex(-1);
+            itemVenda = null;
             atualizarCmbTela();
         } catch (Exception ex) {
             Logger.getLogger(CadastroItemVenda.class.getName()).log(Level.SEVERE, null, ex);

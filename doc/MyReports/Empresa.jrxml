@@ -53,6 +53,7 @@ FROM "EMPRESA"]]>
 		<property name="com.jaspersoft.studio.field.name" value="NOMEDOFUNDADOR"/>
 		<property name="com.jaspersoft.studio.field.label" value="NOMEDOFUNDADOR"/>
 	</field>
+	<sortField name="NOME"/>
 	<background>
 		<band/>
 	</background>

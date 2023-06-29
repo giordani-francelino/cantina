@@ -28,6 +28,7 @@
 		<property name="com.jaspersoft.studio.field.name" value="DATANASCIMENTO"/>
 		<property name="com.jaspersoft.studio.field.label" value="DATANASCIMENTO"/>
 	</field>
+	<sortField name="NOME"/>
 	<background>
 		<band/>
 	</background>
