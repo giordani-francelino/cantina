@@ -110,7 +110,7 @@ public class Principal extends javax.swing.JFrame {
         });
         mnuCadastro.add(mnuCadastroUsuario);
 
-        mnuCadastroPessoa.setText("Pessoa");
+        mnuCadastroPessoa.setText("Cliente");
         mnuCadastroPessoa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mnuCadastroPessoaActionPerformed(evt);

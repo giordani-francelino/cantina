@@ -282,7 +282,7 @@ public class CadastroVenda extends javax.swing.JInternalFrame {
 
     private void btnListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarActionPerformed
         // TODO add your handling code here:
-        new Util().relatorios("/Venda.jasper", "Listagem de vendas");
+        new Util().relatorios("/Venda1.jasper", "Listagem de vendas");
 
     }//GEN-LAST:event_btnListarActionPerformed
 
