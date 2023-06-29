@@ -1,12 +1,12 @@
 -- DELETANDO TODAS AS TABELAS TODAS AS TABELAS
 
+
 drop table itemVenda;
 drop table pagamento;
-drop table venda;
 drop table produto;
+drop table venda;
 drop tabLe pessoa;
 
--- CRIANDO AS TABELAS
 
 CREATE TABLE produto (
     `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
@@ -22,6 +22,7 @@ CREATE TABLE pessoa (
     `nome` varchar(20) NOT NULL,
     `endereco` varchar(100) NOT NULL,
     PRIMARY KEY (`id`),
+    UNIQUE KEY `cpf` (`cpf`),
     UNIQUE KEY `id` (`id`)
 );
 
@@ -39,7 +40,7 @@ CREATE TABLE pessoa (
 
 CREATE TABLE venda (
     `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-    `idPessoa` bigint(11) unsigned NOT NULL,
+    `idPessoa` bigint(20) unsigned NOT NULL,
     `dataVenda` date NOT NULL,
     PRIMARY KEY (`id`),
     UNIQUE KEY `id` (`id`),
@@ -60,7 +61,6 @@ CREATE TABLE pagamento (
     FOREIGN KEY (`id`) REFERENCES `venda` (`id`)
 );
 
-drop table itemVenda;
 CREATE TABLE itemVenda (
     `id` bigInt(20) unsigned NOT NULL AUTO_INCREMENT,
     `idProduto` bigInt(20) unsigned NOT NULL,
@@ -73,4 +73,3 @@ CREATE TABLE itemVenda (
     FOREIGN KEY (`idVenda`) REFERENCES `venda` (`id`)
 );
 
-    UNIQUE KEY `idProduto_idVenda` (`idProduto`, `idVenda`),

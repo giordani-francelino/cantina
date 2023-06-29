@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Pattern;
 import javax.swing.JDialog;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -20,11 +21,15 @@ import net.sf.jasperreports.view.JasperViewer;
  * @author Your Name &lt;francelino at ifnmg&gt;
  */
 public class Util {
-    
-    
-    
-    public void relatorios(String relatorio, String titulo){
-            try (InputStream in = getClass().getResourceAsStream(relatorio)) {
+
+    private static Pattern p = Pattern.compile("[0-9]+");
+
+    public boolean isNumeric(String s) {
+        return (s != null && p.matcher(s).find());
+    }
+
+    public void relatorios(String relatorio, String titulo) {
+        try ( InputStream in = getClass().getResourceAsStream(relatorio)) {
 
             JasperPrint jasperPrint = JasperFillManager.fillReport(
                     in, null, DbConnection.getConnection());
@@ -43,6 +48,5 @@ public class Util {
         }
 
     }
-    
-    
+
 }

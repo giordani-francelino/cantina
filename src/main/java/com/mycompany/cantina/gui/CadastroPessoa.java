@@ -13,6 +13,7 @@ import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
@@ -284,7 +285,7 @@ public class CadastroPessoa extends javax.swing.JInternalFrame {
         if (pessoa == null) {
             pessoa = new Pessoa();
         }
-        if (!txtCpf.getText().equals("")) {
+        if (new Util().isNumeric(txtCpf.getText())) {
             pessoa.setCpf(Long.parseLong(txtCpf.getText()));
         }
         pessoa.setNome(txtNome.getText());
@@ -302,9 +303,14 @@ public class CadastroPessoa extends javax.swing.JInternalFrame {
 
     private void atualizarCmbTela() {
         try {
-            DefaultComboBoxModel<Pessoa> comboBoxModelCpf = new DefaultComboBoxModel<>();
-            comboBoxModelCpf.addAll(new PessoaDao().findAll());
-            cmbSelecionaPessoa.setModel(comboBoxModelCpf);
+
+            List<Pessoa> pessoas = new PessoaDao().findAll();
+            DefaultComboBoxModel<Pessoa> comboBoxModelPessoa = new DefaultComboBoxModel<>();
+            if (pessoas != null) {
+                comboBoxModelPessoa.addAll(pessoas);
+            }
+            cmbSelecionaPessoa.setModel(comboBoxModelPessoa);
+
         } catch (Exception ex) {
             Logger.getLogger(CadastroPessoa.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -316,11 +322,9 @@ public class CadastroPessoa extends javax.swing.JInternalFrame {
             txtCpf.setText("");
             txtNome.setText("");
             txtEndereco.setText("");
-            cmbSelecionaPessoa.setSelectedItem(null);
-            DefaultComboBoxModel<Pessoa> comboBoxModelCpf = new DefaultComboBoxModel<>();
-            comboBoxModelCpf.addAll(new PessoaDao().findAll());
-            cmbSelecionaPessoa.setModel(comboBoxModelCpf);
+            atualizarCmbTela();
             txtCpf.setText("");
+            pessoa = null;
         } catch (Exception ex) {
             Logger.getLogger(CadastroPessoa.class.getName()).log(Level.SEVERE, null, ex);
         }

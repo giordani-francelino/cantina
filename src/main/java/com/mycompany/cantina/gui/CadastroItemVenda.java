@@ -40,13 +40,21 @@ public class CadastroItemVenda extends javax.swing.JInternalFrame {
         itemVenda = new ItemVenda();
         produto = new Produto();
         initComponents();
+
+        List<Venda> vendas = new VendaDao().findAll();
         DefaultComboBoxModel<Venda> comboBoxModelVenda = new DefaultComboBoxModel<>();
-        comboBoxModelVenda.addAll(new VendaDao().findAll());
+        if (vendas != null) {
+            comboBoxModelVenda.addAll(vendas);
+        }
         cmbSelecionaVenda.setModel(comboBoxModelVenda);
 
+        List<Produto> produtos = new ProdutoDao().findAll();
         DefaultComboBoxModel<Produto> comboBoxModelProduto = new DefaultComboBoxModel<>();
-        comboBoxModelProduto.addAll(new ProdutoDao().findAll());
+        if (produtos != null) {
+            comboBoxModelProduto.addAll(produtos);
+        }
         cmbSelecionaProduto.setModel(comboBoxModelProduto);
+
     }
 
     public static CadastroItemVenda getInstance() {
@@ -320,6 +328,7 @@ public class CadastroItemVenda extends javax.swing.JInternalFrame {
 
     private void btnListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarActionPerformed
         // TODO add your handling code here:
+        new Util().relatorios("/.jasper", "Listagem de vendas");
 
     }//GEN-LAST:event_btnListarActionPerformed
 
@@ -375,8 +384,11 @@ public class CadastroItemVenda extends javax.swing.JInternalFrame {
         try {
             venda = (Venda) cmbSelecionaVenda.getModel().getSelectedItem();
 
+            List<Produto> produtos = new ProdutoDao().findAll();
             DefaultComboBoxModel<Produto> comboBoxModelProduto = new DefaultComboBoxModel<>();
-            comboBoxModelProduto.addAll(new ProdutoDao().findAll());
+            if (produtos != null) {
+                comboBoxModelProduto.addAll(produtos);
+            }
             cmbSelecionaProduto.setModel(comboBoxModelProduto);
 
             List<ItemVenda> itemVendas = new VendaDao().localizarItemVendasPorIdVenda(venda);
