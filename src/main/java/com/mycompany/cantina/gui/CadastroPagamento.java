@@ -144,12 +144,8 @@ public class CadastroPagamento extends javax.swing.JInternalFrame {
 
         jLabel9.setText("TIPO DE PAGAMENTO");
 
-        txtValorPagamento.setText("0");
         txtValorPagamento.setToolTipText("");
 
-        txtAcrescimo.setText("0");
-
-        txtDesconto.setText("0");
         txtDesconto.setToolTipText("");
 
         cmbTipoPagamento.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "CARTAO", "DINHEIRO", "PIX" }));
@@ -369,15 +365,15 @@ public class CadastroPagamento extends javax.swing.JInternalFrame {
             pagamento.setDataVencimento(null);
         }
 
-        if (!txtValorPagamento.getText().equals("")) {
+//        if (!txtValorPagamento.getText().equals("")) {
             pagamento.setValorPagamento(Double.parseDouble(txtValorPagamento.getText()));
-        }
-        if (!txtAcrescimo.getText().equals("")) {
+//        }
+//        if (!txtAcrescimo.getText().equals("")) {
             pagamento.setAcrescimo(Double.parseDouble(txtAcrescimo.getText()));
-        }
-        if (!txtDesconto.getText().equals("")) {
+//        }
+//        if (!txtDesconto.getText().equals("")) {
             pagamento.setDesconto(Double.parseDouble(txtDesconto.getText()));
-        }
+//        }
         pagamento.setTipoPagamento(cmbTipoPagamento.getSelectedIndex());
     }
 
@@ -426,9 +422,9 @@ public class CadastroPagamento extends javax.swing.JInternalFrame {
         try {
             frmDataPagamento.setText("");
             frmDataVencimento.setText("");
-            txtValorPagamento.setText("0");
-            txtAcrescimo.setText("0");
-            txtDesconto.setText("0");
+            txtValorPagamento.setText("");
+            txtAcrescimo.setText("");
+            txtDesconto.setText("");
             cmbTipoPagamento.setSelectedIndex(1);
             atualizarCmbTela();
             pagamento = null;

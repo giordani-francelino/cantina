@@ -224,11 +224,8 @@ public class CadastroPessoa extends javax.swing.JInternalFrame {
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
         try {
             // TODO add your handling code here:
-            getDadosTela();
-//            if (new PessoaDao().findById(pessoa.getId()) == null) {
-//                JOptionPane.showMessageDialog(this, "não cadastraado");
-//                return;
-//            }
+//            getDadosTela();
+
             new PessoaDao().deleteById(pessoa.getId());
             limparDadosTela();
             getDadosTela();
@@ -258,9 +255,9 @@ public class CadastroPessoa extends javax.swing.JInternalFrame {
         if (pessoa == null) {
             pessoa = new Pessoa();
         }
-        if (new Util().isNumeric(txtCpf.getText())) {
+//        if (new Util().isNumeric(txtCpf.getText())) {
             pessoa.setCpf(Long.parseLong(txtCpf.getText()));
-        }
+//        }
         pessoa.setNome(txtNome.getText());
         pessoa.setEndereco(txtEndereco.getText());
     }

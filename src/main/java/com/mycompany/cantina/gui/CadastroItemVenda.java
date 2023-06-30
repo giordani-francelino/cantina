@@ -127,7 +127,6 @@ public class CadastroItemVenda extends javax.swing.JInternalFrame {
 
         jLabel2.setText("QUANTIDADE");
 
-        txtQuantidade.setText("0");
         txtQuantidade.setToolTipText("");
 
         cmbSelecionaProduto.addActionListener(new java.awt.event.ActionListener() {
@@ -136,7 +135,6 @@ public class CadastroItemVenda extends javax.swing.JInternalFrame {
             }
         });
 
-        txtPreco.setText("0");
         txtPreco.setToolTipText("");
 
         jLabel4.setText("PREÇO");
@@ -204,23 +202,19 @@ public class CadastroItemVenda extends javax.swing.JInternalFrame {
                 .addGroup(jpPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(cmbSelecionaVenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
-                .addGap(9, 9, 9)
-                .addGroup(jpPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jpPrincipalLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(jpPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4)
-                            .addComponent(txtPreco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jpPrincipalLayout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addGroup(jpPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(cmbSelecionaProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1))
-                        .addGap(0, 44, Short.MAX_VALUE)))
+                .addGap(19, 19, 19)
+                .addGroup(jpPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cmbSelecionaProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jpPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtPreco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
+                .addGap(0, 14, Short.MAX_VALUE)
                 .addGroup(jpPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jpPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
                     .addComponent(cmbSelecionaItemVenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -247,7 +241,7 @@ public class CadastroItemVenda extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jpPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         pack();
@@ -281,7 +275,7 @@ public class CadastroItemVenda extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         try {
             // TODO add your handling code here:
-            getDadosTela();
+//            getDadosTela();
             //            if (new ItemVendaDao().findById(venda.getId()) == null) {
             //                JOptionPane.showMessageDialog(this, "não cadastraado");
             //                return;
@@ -328,12 +322,12 @@ public class CadastroItemVenda extends javax.swing.JInternalFrame {
             itemVenda = new ItemVenda();
         }
 
-        if (!txtPreco.getText().equals("")) {
+//        if (!txtPreco.getText().equals("")) {
             itemVenda.setPreco(Double.parseDouble(txtPreco.getText()));
-        }
-        if (!txtQuantidade.getText().equals("")) {
+//        }
+//        if (!txtQuantidade.getText().equals("")) {
             itemVenda.setQuantidade(Integer.parseInt(txtQuantidade.getText()));
-        }
+//        }
         produto = (Produto) cmbSelecionaProduto.getModel().getSelectedItem();
         itemVenda.setProduto(produto);
         itemVenda.setVenda(venda);
@@ -376,8 +370,8 @@ public class CadastroItemVenda extends javax.swing.JInternalFrame {
 
     private void limparDadosTela() {
         try {
-            txtPreco.setText("0");
-            txtQuantidade.setText("0");
+            txtPreco.setText("");
+            txtQuantidade.setText("");
             cmbSelecionaProduto.setSelectedIndex(-1);
             itemVenda = null;
             atualizarCmbTela();
