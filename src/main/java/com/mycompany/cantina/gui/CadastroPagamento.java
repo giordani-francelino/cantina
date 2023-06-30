@@ -306,7 +306,7 @@ public class CadastroPagamento extends javax.swing.JInternalFrame {
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
         try {
             // TODO add your handling code here:
-            getDadosTela();
+//            getDadosTela();
             //            if (new PagamentoDao().findById(venda.getId()) == null) {
             //                JOptionPane.showMessageDialog(this, "não cadastraado");
             //                return;

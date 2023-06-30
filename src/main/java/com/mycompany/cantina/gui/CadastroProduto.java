@@ -207,7 +207,7 @@ public class CadastroProduto extends javax.swing.JInternalFrame {
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
         // TODO add your handling code here:
         try {
-            getDadosTela();
+//            getDadosTela();
             // TODO add your handling code here:
 //            if (new ProdutoDao().findById(produto.getId()) == null) {
 //                JOptionPane.showMessageDialog(this, "não cadastraado");
