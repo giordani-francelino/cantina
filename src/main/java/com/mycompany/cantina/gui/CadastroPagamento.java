@@ -16,6 +16,7 @@ import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
@@ -39,8 +40,11 @@ public class CadastroPagamento extends javax.swing.JInternalFrame {
         venda = new Venda();
         pagamento = new Pagamento();
         initComponents();
+        List<Venda> vendas = new VendaDao().findAll();
         DefaultComboBoxModel<Venda> comboBoxModelVenda = new DefaultComboBoxModel<>();
-        comboBoxModelVenda.addAll(new VendaDao().findAll());
+        if (vendas != null) {
+            comboBoxModelVenda.addAll(vendas);
+        }
         cmbSelecionaVenda.setModel(comboBoxModelVenda);
     }
 
@@ -64,7 +68,6 @@ public class CadastroPagamento extends javax.swing.JInternalFrame {
 
         jpPrincipal = new javax.swing.JPanel();
         btnInserir = new javax.swing.JButton();
-        btnAtualizar = new javax.swing.JButton();
         btnLimpar = new javax.swing.JButton();
         btnExcluir = new javax.swing.JButton();
         btnListar = new javax.swing.JButton();
@@ -89,17 +92,10 @@ public class CadastroPagamento extends javax.swing.JInternalFrame {
         setIconifiable(true);
         setTitle("Cadastro de Pessoa");
 
-        btnInserir.setText("Inserir");
+        btnInserir.setText("Salvar");
         btnInserir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnInserirActionPerformed(evt);
-            }
-        });
-
-        btnAtualizar.setText("Atualizar");
-        btnAtualizar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAtualizarActionPerformed(evt);
             }
         });
 
@@ -175,9 +171,7 @@ public class CadastroPagamento extends javax.swing.JInternalFrame {
                         .addGap(24, 24, 24)
                         .addGroup(jpPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpPrincipalLayout.createSequentialGroup()
-                                .addComponent(btnInserir, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnAtualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnInserir, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(btnLimpar, javax.swing.GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE)
                                 .addGap(18, 18, 18)
@@ -212,7 +206,7 @@ public class CadastroPagamento extends javax.swing.JInternalFrame {
                 .addContainerGap())
         );
 
-        jpPrincipalLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnExcluir, btnInserir, btnListar});
+        jpPrincipalLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnExcluir, btnListar});
 
         jpPrincipalLayout.setVerticalGroup(
             jpPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -251,9 +245,7 @@ public class CadastroPagamento extends javax.swing.JInternalFrame {
                         .addComponent(btnLimpar)
                         .addComponent(btnExcluir)
                         .addComponent(btnListar))
-                    .addGroup(jpPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnInserir)
-                        .addComponent(btnAtualizar)))
+                    .addComponent(btnInserir))
                 .addContainerGap())
         );
 
@@ -320,9 +312,9 @@ public class CadastroPagamento extends javax.swing.JInternalFrame {
             // TODO add your handling code here:
             getDadosTela();
             //            if (new PagamentoDao().findById(venda.getId()) == null) {
-                //                JOptionPane.showMessageDialog(this, "não cadastraado");
-                //                return;
-                //            }
+            //                JOptionPane.showMessageDialog(this, "não cadastraado");
+            //                return;
+            //            }
             new PagamentoDao().deleteById(pagamento.getId());
             limparDadosTela();
             getDadosTela();
@@ -337,30 +329,14 @@ public class CadastroPagamento extends javax.swing.JInternalFrame {
         limparDadosTela();
     }//GEN-LAST:event_btnLimparActionPerformed
 
-    private void btnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarActionPerformed
-        try {
-            // TODO add your handling code here:
-            getDadosTela();
-            if (new PagamentoDao().findById(pagamento.getId()) == null) {
-                JOptionPane.showMessageDialog(this, "não cadastraado");
-                return;
-            }
-            new PagamentoDao().saveOrUpdate(pagamento);
-            limparDadosTela();
-            getDadosTela();
-        } catch (Exception ex) {
-            Logger.getLogger(CadastroPagamento.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_btnAtualizarActionPerformed
-
     private void btnInserirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInserirActionPerformed
         try {
             // TODO add your handling code here:
             getDadosTela();
             //            if (new PagamentoDao().findById(venda.getId()) != null) {
-                //                JOptionPane.showMessageDialog(this, "já cadastraado");
-                //                return;
-                //            }
+            //                JOptionPane.showMessageDialog(this, "já cadastraado");
+            //                return;
+            //            }
             new PagamentoDao().saveOrUpdate(pagamento);
             limparDadosTela();
             getDadosTela();
@@ -433,8 +409,11 @@ public class CadastroPagamento extends javax.swing.JInternalFrame {
     private void atualizarCmbTela() {
         try {
 
+            List<Pagamento> pagamentos = new VendaDao().localizarPagamentosPorIdVenda(venda);
             DefaultComboBoxModel<Pagamento> comboBoxModelPagamento = new DefaultComboBoxModel<>();
-            comboBoxModelPagamento.addAll(new VendaDao().localizarPagamentosPorIdVenda(venda));
+            if (pagamentos != null) {
+                comboBoxModelPagamento.addAll(pagamentos);
+            }
             cmbSelecionaPagamento.setModel(comboBoxModelPagamento);
 
         } catch (Exception ex) {
@@ -452,6 +431,7 @@ public class CadastroPagamento extends javax.swing.JInternalFrame {
             txtDesconto.setText("0");
             cmbTipoPagamento.setSelectedIndex(1);
             atualizarCmbTela();
+            pagamento = null;
         } catch (Exception ex) {
             Logger.getLogger(CadastroPagamento.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -459,7 +439,6 @@ public class CadastroPagamento extends javax.swing.JInternalFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAtualizar;
     private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnInserir;
     private javax.swing.JButton btnLimpar;

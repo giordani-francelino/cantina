@@ -15,6 +15,7 @@ import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
@@ -38,9 +39,12 @@ public class CadastroVenda extends javax.swing.JInternalFrame {
         pessoa = new Pessoa();
         venda = new Venda();
         initComponents();
-        DefaultComboBoxModel<Pessoa> comboBoxModelPessoa = new DefaultComboBoxModel<>();
-        comboBoxModelPessoa.addAll(new PessoaDao().findAll());
-        cmbSelecionaPessoa.setModel(comboBoxModelPessoa);
+            List<Pessoa> pessoas = new PessoaDao().findAll();
+            DefaultComboBoxModel<Pessoa> comboBoxModelPessoa = new DefaultComboBoxModel<>();
+            if (pessoas != null) {
+                comboBoxModelPessoa.addAll(pessoas);
+            }
+            cmbSelecionaPessoa.setModel(comboBoxModelPessoa);
 //        atualizarCmbTela();
 
     }
@@ -65,7 +69,6 @@ public class CadastroVenda extends javax.swing.JInternalFrame {
 
         jpPrincipal = new javax.swing.JPanel();
         btnInserir = new javax.swing.JButton();
-        btnAtualizar = new javax.swing.JButton();
         btnLimpar = new javax.swing.JButton();
         btnExcluir = new javax.swing.JButton();
         btnListar = new javax.swing.JButton();
@@ -81,17 +84,10 @@ public class CadastroVenda extends javax.swing.JInternalFrame {
         setIconifiable(true);
         setTitle("Cadastro de Venda");
 
-        btnInserir.setText("Inserir");
+        btnInserir.setText("Salvar");
         btnInserir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnInserirActionPerformed(evt);
-            }
-        });
-
-        btnAtualizar.setText("Atualizar");
-        btnAtualizar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAtualizarActionPerformed(evt);
             }
         });
 
@@ -136,7 +132,7 @@ public class CadastroVenda extends javax.swing.JInternalFrame {
 
         frmDataVenda.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getDateInstance(java.text.DateFormat.SHORT))));
 
-        jLabel4.setText("Para inserir não preencha SELECIONA VENDA ");
+        jLabel4.setText("Para inserir não preencha SELECIONA VENDA, caso preencha indevidamente clik em Limpar ");
 
         javax.swing.GroupLayout jpPrincipalLayout = new javax.swing.GroupLayout(jpPrincipal);
         jpPrincipal.setLayout(jpPrincipalLayout);
@@ -145,13 +141,9 @@ public class CadastroVenda extends javax.swing.JInternalFrame {
             .addGroup(jpPrincipalLayout.createSequentialGroup()
                 .addGap(24, 24, 24)
                 .addGroup(jpPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jpPrincipalLayout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpPrincipalLayout.createSequentialGroup()
-                        .addComponent(btnInserir, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnAtualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnInserir, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btnLimpar, javax.swing.GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
@@ -176,7 +168,7 @@ public class CadastroVenda extends javax.swing.JInternalFrame {
                 .addContainerGap())
         );
 
-        jpPrincipalLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnExcluir, btnInserir, btnListar});
+        jpPrincipalLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnExcluir, btnListar});
 
         jpPrincipalLayout.setVerticalGroup(
             jpPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -201,9 +193,7 @@ public class CadastroVenda extends javax.swing.JInternalFrame {
                         .addComponent(btnLimpar)
                         .addComponent(btnExcluir)
                         .addComponent(btnListar))
-                    .addGroup(jpPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnInserir)
-                        .addComponent(btnAtualizar)))
+                    .addComponent(btnInserir))
                 .addContainerGap())
         );
 
@@ -227,10 +217,6 @@ public class CadastroVenda extends javax.swing.JInternalFrame {
         try {
             // TODO add your handling code here:
             getDadosTela();
-//            if (new VendaDao().findById(pessoa.getId()) != null) {
-//                JOptionPane.showMessageDialog(this, "já cadastraado");
-//                return;
-//            }
             new VendaDao().saveOrUpdate(venda);
             limparDadosTela();
             getDadosTela();
@@ -240,22 +226,6 @@ public class CadastroVenda extends javax.swing.JInternalFrame {
             Logger.getLogger(CadastroVenda.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnInserirActionPerformed
-
-    private void btnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarActionPerformed
-        try {
-            // TODO add your handling code here:
-            getDadosTela();
-            if (new VendaDao().findById(venda.getId()) == null) {
-                JOptionPane.showMessageDialog(this, "não cadastraado");
-                return;
-            }
-            new VendaDao().saveOrUpdate(venda);
-            limparDadosTela();
-            getDadosTela();
-        } catch (Exception ex) {
-            Logger.getLogger(CadastroVenda.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_btnAtualizarActionPerformed
 
     private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
         limparDadosTela();
@@ -329,9 +299,14 @@ public class CadastroVenda extends javax.swing.JInternalFrame {
     private void atualizarCmbTela() {
         try {
 
+
+            List<Venda> vendas = new PessoaDao().localizarVendasPorIdPessoa(pessoa);
             DefaultComboBoxModel<Venda> comboBoxModelVenda = new DefaultComboBoxModel<>();
-            comboBoxModelVenda.addAll(new PessoaDao().localizarVendasPorIdPessoa(pessoa));
+            if (vendas != null) {
+                comboBoxModelVenda.addAll(vendas);
+            }
             cmbSelecionaVenda.setModel(comboBoxModelVenda);
+
         } catch (Exception ex) {
             Logger.getLogger(CadastroVenda.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -342,6 +317,7 @@ public class CadastroVenda extends javax.swing.JInternalFrame {
         try {
             frmDataVenda.setText("");
             atualizarCmbTela();
+            venda = null;
         } catch (Exception ex) {
             Logger.getLogger(CadastroVenda.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -349,7 +325,6 @@ public class CadastroVenda extends javax.swing.JInternalFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAtualizar;
     private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnInserir;
     private javax.swing.JButton btnLimpar;
