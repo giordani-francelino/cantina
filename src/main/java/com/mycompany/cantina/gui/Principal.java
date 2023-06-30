@@ -6,6 +6,7 @@
  */
 package com.mycompany.cantina.gui;
 
+import com.mycompany.cantina.Util;
 import com.mycompany.cantina.entidade.Usuario;
 import java.beans.PropertyVetoException;
 import java.util.logging.Level;
@@ -66,6 +67,9 @@ public class Principal extends javax.swing.JFrame {
         mnuPagamento = new javax.swing.JMenuItem();
         mnuAdministrador = new javax.swing.JMenuItem();
         mnuSair = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
+        mnuItemvenda = new javax.swing.JMenuItem();
+        mnuPagamentoVenda = new javax.swing.JMenuItem();
         mnuAjuda = new javax.swing.JMenu();
         mnuSobre = new javax.swing.JMenuItem();
 
@@ -168,6 +172,26 @@ public class Principal extends javax.swing.JFrame {
 
         mnuBarra.add(mnuArquivo);
 
+        jMenu2.setText("Relatórios");
+
+        mnuItemvenda.setText("Itens por venda");
+        mnuItemvenda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuItemvendaActionPerformed(evt);
+            }
+        });
+        jMenu2.add(mnuItemvenda);
+
+        mnuPagamentoVenda.setText("Pagamentos por venda");
+        mnuPagamentoVenda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuPagamentoVendaActionPerformed(evt);
+            }
+        });
+        jMenu2.add(mnuPagamentoVenda);
+
+        mnuBarra.add(jMenu2);
+
         mnuAjuda.setMnemonic('u');
         mnuAjuda.setText("Ajuda");
         mnuAjuda.addActionListener(new java.awt.event.ActionListener() {
@@ -247,9 +271,20 @@ public class Principal extends javax.swing.JFrame {
 
     private void mnuItemVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuItemVendaActionPerformed
         // TODO add your handling code here:
-                anexarJanela(CadastroItemVenda.getInstance());
+        anexarJanela(CadastroItemVenda.getInstance());
 
     }//GEN-LAST:event_mnuItemVendaActionPerformed
+
+    private void mnuItemvendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuItemvendaActionPerformed
+        // TODO add your handling code here:
+        new Util().relatorios("/VendaItemVenda.jasper", "Listagem de itens por venda");
+    }//GEN-LAST:event_mnuItemvendaActionPerformed
+
+    private void mnuPagamentoVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuPagamentoVendaActionPerformed
+        // TODO add your handling code here:VendaPagamento
+        new Util().relatorios("/VendaPagamento.jasper", "Listagem de pagamentos por venda");
+
+    }//GEN-LAST:event_mnuPagamentoVendaActionPerformed
 
     private void anexarJanela(JInternalFrame janela) {
         if (!janela.isVisible()) {
@@ -286,6 +321,7 @@ public class Principal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane dskPrincipal;
     private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuItem mnuAdministrador;
     private javax.swing.JMenu mnuAjuda;
     private javax.swing.JMenu mnuArquivo;
@@ -295,7 +331,9 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem mnuCadastroUsuario;
     private javax.swing.JMenuItem mnuCadstroVenda;
     private javax.swing.JMenuItem mnuItemVenda;
+    private javax.swing.JMenuItem mnuItemvenda;
     private javax.swing.JMenuItem mnuPagamento;
+    private javax.swing.JMenuItem mnuPagamentoVenda;
     private javax.swing.JMenuItem mnuProduto;
     private javax.swing.JMenuItem mnuSair;
     private javax.swing.JMenuItem mnuSobre;

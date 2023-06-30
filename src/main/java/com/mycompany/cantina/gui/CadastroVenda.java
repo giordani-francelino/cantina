@@ -83,6 +83,23 @@ public class CadastroVenda extends javax.swing.JInternalFrame {
         setClosable(true);
         setIconifiable(true);
         setTitle("Cadastro de Venda");
+        addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameActivated(evt);
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+            }
+        });
 
         btnInserir.setText("Salvar");
         btnInserir.addActionListener(new java.awt.event.ActionListener() {
@@ -267,6 +284,16 @@ public class CadastroVenda extends javax.swing.JInternalFrame {
         venda = (Venda) cmbSelecionaVenda.getModel().getSelectedItem();
         setDadosTela();
     }//GEN-LAST:event_cmbSelecionaVendaActionPerformed
+
+    private void formInternalFrameActivated(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameActivated
+        // TODO add your handling code here:
+            List<Pessoa> pessoas = new PessoaDao().findAll();
+            DefaultComboBoxModel<Pessoa> comboBoxModelPessoa = new DefaultComboBoxModel<>();
+            if (pessoas != null) {
+                comboBoxModelPessoa.addAll(pessoas);
+            }
+            cmbSelecionaPessoa.setModel(comboBoxModelPessoa);
+    }//GEN-LAST:event_formInternalFrameActivated
 
     private void getDadosTela() {
         pessoa = (Pessoa) cmbSelecionaPessoa.getModel().getSelectedItem();

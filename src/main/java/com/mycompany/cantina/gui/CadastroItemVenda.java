@@ -94,6 +94,23 @@ public class CadastroItemVenda extends javax.swing.JInternalFrame {
         setClosable(true);
         setIconifiable(true);
         setTitle("Cadastro de Item Vendido");
+        addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameActivated(evt);
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+            }
+        });
 
         btnInserir.setText("Salvar");
         btnInserir.addActionListener(new java.awt.event.ActionListener() {
@@ -292,7 +309,7 @@ public class CadastroItemVenda extends javax.swing.JInternalFrame {
 
     private void btnListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarActionPerformed
         // TODO add your handling code here:
-        new Util().relatorios("/ItemVenda.jasper", "Listagem de vendas");
+        new Util().relatorios("/ItemVenda.jasper", "Listagem de itens vendidos");
 
     }//GEN-LAST:event_btnListarActionPerformed
 
@@ -314,6 +331,24 @@ public class CadastroItemVenda extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         atualizarCmbTela();
     }//GEN-LAST:event_cmbSelecionaVendaActionPerformed
+
+    private void formInternalFrameActivated(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameActivated
+        // TODO add your handling code here:
+        List<Venda> vendas = new VendaDao().findAll();
+        DefaultComboBoxModel<Venda> comboBoxModelVenda = new DefaultComboBoxModel<>();
+        if (vendas != null) {
+            comboBoxModelVenda.addAll(vendas);
+        }
+        cmbSelecionaVenda.setModel(comboBoxModelVenda);
+
+        List<Produto> produtos = new ProdutoDao().findAll();
+        DefaultComboBoxModel<Produto> comboBoxModelProduto = new DefaultComboBoxModel<>();
+        if (produtos != null) {
+            comboBoxModelProduto.addAll(produtos);
+        }
+        cmbSelecionaProduto.setModel(comboBoxModelProduto);
+
+    }//GEN-LAST:event_formInternalFrameActivated
     private void getDadosTela() {
         venda = (Venda) cmbSelecionaVenda.getModel().getSelectedItem();
         itemVenda = (ItemVenda) cmbSelecionaItemVenda.getModel().getSelectedItem();

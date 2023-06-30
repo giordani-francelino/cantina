@@ -269,12 +269,12 @@ public class CadastroProduto extends javax.swing.JInternalFrame {
     private void limparDadosTela() {
         try {
             txtDescricao.setText("");
-            txtPreco.setText("0");
+            txtPreco.setText("");
             cmbSelecionProduto.setSelectedItem(null);
             DefaultComboBoxModel<Produto> comboBoxModelDescricao = new DefaultComboBoxModel<>();
             comboBoxModelDescricao.addAll(new ProdutoDao().findAll());
             cmbSelecionProduto.setModel(comboBoxModelDescricao);
-            txtPreco.setText("0");
+            txtPreco.setText("");
             produto = null;
         } catch (Exception ex) {
             Logger.getLogger(CadastroProduto.class.getName()).log(Level.SEVERE, null, ex);
