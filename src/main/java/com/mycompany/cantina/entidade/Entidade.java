@@ -43,6 +43,13 @@ public abstract class Entidade {
 
     private Long id;
 
+    public Entidade(Long id) {
+        this.id = id;
+    }
+    public Entidade() {
+    }
+
+    
     public Long getId() {
         return id;
     }
@@ -50,4 +57,8 @@ public abstract class Entidade {
     public void setId(Long id) {
         this.id = id;
     }
+
+
 }
+
+//comt

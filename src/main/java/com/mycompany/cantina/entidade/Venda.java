@@ -15,22 +15,29 @@ public class Venda
         extends Entidade {
 
     private LocalDate dataVenda;
-    ArrayList<Pagamento> pagamentos;
-    ArrayList<ItemVenda> itensVendas;
+
+    private ArrayList<Pagamento> pagamentos;
+    private ArrayList<ItemVenda> itensVendas;
+
+    private Pessoa pessoa;
 
     //<editor-fold defaultstate="collapsed" desc="Construtores">
     public Venda() {
+        pessoa = new Pessoa();
         pagamentos = new ArrayList<>();
         itensVendas = new ArrayList<>();
     }
 
-    public Venda(LocalDate dataVenda) {
+    public Venda(Pessoa pessoa, LocalDate dataVenda) {
         this();
+        this.pessoa = pessoa;
         this.dataVenda = dataVenda;
     }
 
 //</editor-fold>
     //<editor-fold defaultstate="collapsed" desc="Getters / Setters">
+ 
+    
     public LocalDate getDataVenda() {
         return dataVenda;
     }
@@ -55,6 +62,22 @@ public class Venda
         this.itensVendas = itemVendas;
     }
 
+    public ArrayList<ItemVenda> getItensVendas() {
+        return itensVendas;
+    }
+
+    public void setItensVendas(ArrayList<ItemVenda> itensVendas) {
+        this.itensVendas = itensVendas;
+    }
+
+    public Pessoa getPessoa() {
+        return pessoa;
+    }
+
+    public void setPessoa(Pessoa pessoa) {
+        this.pessoa = pessoa;
+    }
+
 //</editor-fold>
     //<editor-fold defaultstate="collapsed" desc="Adciona PAGAMENTO e ItemVenda">
     public void adicionarPagamentos(Pagamento pagamento) {
@@ -71,10 +94,22 @@ public class Venda
     @Override
     public String toString() {
         return "Venda{"
-                + "dataVenda=" + dataVenda
+                + "id=" + getId()
+                + ", idPessoa=" + pessoa.getId()
+                + ", dataVenda=" + dataVenda
                 + ", pagamentos=" + pagamentos
                 + ", itensVendas=" + itensVendas
-                + '}';
+                + '}' + '\n';
+
+//        StringBuilder sb = new StringBuilder();
+//        sb.append("Venda{");
+//        sb.append("id=").append(super.getId());
+//        sb.append(", idPessoa=").append((getPessoa() == null ? "null, " : getPessoa().getId()));
+//        sb.append(", dataVenda=").append(getDataVenda());
+//        sb.append('}');
+//        String s = sb.toString();
+//        s = s + "\n";
+//        return s;
     }
 
 }

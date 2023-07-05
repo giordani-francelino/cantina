@@ -20,6 +20,9 @@ public class Pagamento
     private Double desconto;
     private Venda venda;
     private Integer tipoPagamento;
+    public enum TipoPagamento {
+        CARTAO, DINHEIRO, PIX
+    }
 
     //<editor-fold defaultstate="collapsed" desc="Construtores">
     public Pagamento() {
@@ -97,14 +100,15 @@ public class Pagamento
     @Override
     public String toString() {
         return "Pagamento{"
-                + "dataPagamento=" + dataPagamento
+                + "id=" + getId()
+                + ", idVenda=" + venda.getId()
+                + ", dataPagamento=" + dataPagamento
                 + ", dataVencimento=" + dataVencimento
                 + ", valorPagamento=" + valorPagamento
                 + ", acrescimo=" + acrescimo
                 + ", desconto=" + desconto
-                + ", venda=" + venda
                 + ", tipoPagamento=" + tipoPagamento
-                + '}';
+                + '}' + '\n';
     }
 
 }

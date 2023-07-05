@@ -1,0 +1,3 @@
+pduartp
+ArPeNe3981
+mysqldump -u cantina -p cantina > C:\dev\poo\projects\Cantina\doc\backup.sql

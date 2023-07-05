@@ -3,7 +3,6 @@
  */
 package com.mycompany.cantina.repositorio;
 
-
 import com.mycompany.cantina.entidade.Entidade;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -27,7 +26,7 @@ public abstract class Dao<T>
     public static final String DB = "cantina";
 
     @Override
-    public Long saveOrUpdate(T e) {
+    public Long saveOrUpdate(T e) throws Exception {
 
         // Primary key
         Long id = 0L;
@@ -37,7 +36,7 @@ public abstract class Dao<T>
 
             // Insert a new register
             // try-with-resources
-            try ( PreparedStatement preparedStatement
+            try (PreparedStatement preparedStatement
                     = DbConnection.getConnection().prepareStatement(
                             getSaveStatment(),
                             Statement.RETURN_GENERATED_KEYS)) {
@@ -63,11 +62,12 @@ public abstract class Dao<T>
 
             } catch (Exception ex) {
                 System.out.println(">> " + ex);
+                throw new Exception("Não foi possível inserir ou atualizar o registro");
             }
 
         } else {
             // Update existing record
-            try ( PreparedStatement preparedStatement
+            try (PreparedStatement preparedStatement
                     = DbConnection.getConnection().prepareStatement(
                             getUpdateStatment())) {
 
@@ -85,6 +85,7 @@ public abstract class Dao<T>
 
             } catch (Exception ex) {
                 System.out.println("Exception: " + ex);
+                throw new Exception("Não foi possível inserir ou atualizar o registro");
             }
         }
 
@@ -92,9 +93,9 @@ public abstract class Dao<T>
     }
 
     @Override
-    public T findById(Long id) {
+    public T findById(Long id) throws Exception {
 
-        try ( PreparedStatement preparedStatement
+        try (PreparedStatement preparedStatement
                 = DbConnection.getConnection().prepareStatement(
                         getFindByIdStatment())) {
 
@@ -113,16 +114,16 @@ public abstract class Dao<T>
 
         } catch (Exception ex) {
             System.out.println("Exception: " + ex);
+            throw new Exception("Não foi possível consultar o registro");
         }
 
         return null;
     }
 
-
     @Override
-    public boolean deleteById(Long id) {
+    public boolean deleteById(Long id) throws Exception {
 
-        try ( PreparedStatement preparedStatement
+        try (PreparedStatement preparedStatement
                 = DbConnection.getConnection().prepareStatement(
                         getDeleteByIdStatment())) {
 
@@ -134,19 +135,18 @@ public abstract class Dao<T>
             // Performs the query on the database
 
             // Returns the respective object if exists
-                return preparedStatement.execute();
+            return preparedStatement.execute();
 
         } catch (Exception ex) {
             System.out.println("Exception: " + ex);
+            throw new Exception("Não foi possível excluir o registro");
         }
-
-        return false;
     }
 
     @Override
     public List<T> findAll() {
 
-        try ( PreparedStatement preparedStatement
+        try (PreparedStatement preparedStatement
                 = DbConnection.getConnection().prepareStatement(
                         getFindAllStatment())) {
 
@@ -179,6 +179,73 @@ public abstract class Dao<T>
         }
 
         return objects.isEmpty() ? null : objects;
+    }
+
+    @Override
+    public Long salvar(T o) {
+
+        Long id = 0L;
+
+        // Novo registro
+        if (((Entidade) o).getId() == null || ((Entidade) o).getId() == 0) {
+
+            // try-with-resources libera recurso ao final do bloco (PreparedStatement)
+            try (PreparedStatement pstmt
+                    = DbConnection.getConnection().prepareStatement(
+                            // Sentença SQL para inserção de registros
+                            getSaveStatment(),
+                            // Especifica que a(s) chave(s) primária(s) devem ser
+                            // retornadas como resposta
+                            Statement.RETURN_GENERATED_KEYS)) {
+
+                // Prepara a declaração com os dados do objeto passado
+                composeSaveOrUpdateStatement(pstmt, o);
+
+                // Executa o comando SQL
+                pstmt.executeUpdate();
+
+                // Recupera os resultados da execução: chaves primárias dos registros criados
+                ResultSet rs = pstmt.getGeneratedKeys();
+
+                // Se há alguma chave, move para o primeiro registro...
+                if (rs.next()) {
+                    // TODO Retorno imediato (return ...)?
+                    // TODO Repensar a estratégia de uso de K: Integer? String?
+                    // ... e recupera o (único) longo retornado
+                    id = rs.getLong(1);
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        } else {
+            // Atualizar registro
+
+            try (PreparedStatement pstmt
+                    = DbConnection.getConnection().prepareStatement(
+                            // Sentença SQL para atualização de registros
+                            getUpdateStatment())) {
+
+                // Prepara a declaração com os dados do objeto passado
+                composeSaveOrUpdateStatement(pstmt, o);
+
+                // Executa o comando SQL
+                pstmt.executeUpdate();
+
+                // Retorno da mesma id recebida com o objeto para manter
+                // compatibilidade com o procedimento do método
+                // TODO Retorno imediato (return ...)?
+                id = ((Entidade) o).getId();
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        // Cast requerido para adaptação do tipo pois, mesmo que a id seja sempre
+        // longa, esse trecho de código não reconhece tal tipo implicitamente
+        return id;
     }
 
 }

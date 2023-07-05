@@ -1,0 +1,4 @@
+Para incluir usuário no mysql com privilégios do root conecte-se com o root e faça os três comandos abaixo:
+mysql> CREATE USER 'cantina'@'localhost' IDENTIFIED BY 'cantina';
+mysql> GRANT ALL PRIVILEGES ON *.* TO 'cantina'@'localhost';
+mysql> FLUSH PRIVILEGES;

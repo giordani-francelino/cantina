@@ -13,21 +13,21 @@ import java.util.ArrayList;
 public class Produto
         extends Entidade {
 
+    ArrayList<ItemVenda> itensVendas;
+
     private String descricao;
     private Double preco;
-    ArrayList<ItemVenda> itensVendas;
-    ArrayList<ItemCardapio> itensCardapios;
 
     //<editor-fold defaultstate="collapsed" desc="Construtores">
     public Produto() {
         itensVendas = new ArrayList<>();
-        itensCardapios = new ArrayList<>();
     }
 
     public Produto(String descricao, Double preco) {
         this();
-        this.descricao = descricao;
-        this.preco = preco;
+
+        setDescricao(descricao);
+        setPreco(preco);
     }
 
 //</editor-fold>
@@ -64,13 +64,6 @@ public class Produto
         this.itensVendas = itens;
     }
 
-    public ArrayList<ItemCardapio> getCardapios() {
-        return itensCardapios;
-    }
-
-    public void setCardapios(ArrayList<ItemCardapio> cardapios) {
-        this.itensCardapios = cardapios;
-    }
 
 //</editor-fold>
     //<editor-fold defaultstate="collapsed" desc="Adiciona item (VENDA e CARDÁPIO">
@@ -79,20 +72,16 @@ public class Produto
         itemVenda.setProduto(this);
     }
 
-    public void adicionarCardapio(ItemCardapio itemCardapio) {
-        itensCardapios.add(itemCardapio);
-        itemCardapio.setProduto(this);
-    }
-
 //</editor-fold>
     @Override
     public String toString() {
-        return "Produto{"
-                + "descricao=" + descricao
+        return "Produto{"   
+                + "id=" + getId()
+                + ", descricao=" + descricao
                 + ", preco=" + preco
-                + ", itensVendas=" + itensVendas
-                + ", itensCardapios=" + itensCardapios
-                + '}';
+//                + ", itensVendas=" + itensVendas
+//                + ", itensCardapios=" + itensCardapios
+                + '}' + '\n';
     }
 
 }
