@@ -64,12 +64,12 @@ public class CadastroPessoa extends javax.swing.JInternalFrame {
         btnjbtListar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        txtNome = new javax.swing.JTextField();
-        txtEndereco = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         cmbSelecionaPessoa = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
         txtCpf = new com.mycompany.cantina.gui.TxtField();
+        txtNome = new com.mycompany.cantina.gui.TxtField();
+        txtEndereco = new com.mycompany.cantina.gui.TxtField();
 
         setClosable(true);
         setIconifiable(true);
@@ -135,8 +135,7 @@ public class CadastroPessoa extends javax.swing.JInternalFrame {
                         .addComponent(btnjbtListar, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpPrincipalLayout.createSequentialGroup()
                         .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(275, 275, 275))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpPrincipalLayout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -148,9 +147,10 @@ public class CadastroPessoa extends javax.swing.JInternalFrame {
                                 .addGap(70, 70, 70))
                             .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jpPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtNome, javax.swing.GroupLayout.DEFAULT_SIZE, 263, Short.MAX_VALUE)
-                            .addComponent(txtCpf, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGroup(jpPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
         );
 
@@ -171,7 +171,7 @@ public class CadastroPessoa extends javax.swing.JInternalFrame {
                 .addGroup(jpPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
                 .addGroup(jpPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cmbSelecionaPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
@@ -205,13 +205,8 @@ public class CadastroPessoa extends javax.swing.JInternalFrame {
         try {
             // TODO add your handling code here:
             getDadosTela();
-//            if (new PessoaDao().findById(pessoa.getId()) != null) {
-//                JOptionPane.showMessageDialog(this, "já cadastraado");
-//                return;
-//            }
             new PessoaDao().saveOrUpdate(pessoa);
             limparDadosTela();
-            getDadosTela();
             atualizarCmbTela();
 
         } catch (Exception ex) {
@@ -226,11 +221,12 @@ public class CadastroPessoa extends javax.swing.JInternalFrame {
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
         try {
             // TODO add your handling code here:
-//            getDadosTela();
-
-            new PessoaDao().deleteById(pessoa.getId());
+            if (pessoa != null) {
+                if (pessoa.getId() != null && pessoa.getId() != 0) {
+                    new PessoaDao().deleteById(pessoa.getId());
+                }
+            }
             limparDadosTela();
-            getDadosTela();
             atualizarCmbTela();
 
         } catch (Exception ex) {
@@ -257,9 +253,10 @@ public class CadastroPessoa extends javax.swing.JInternalFrame {
         if (pessoa == null) {
             pessoa = new Pessoa();
         }
-//        if (new Util().isNumeric(txtCpf.getText())) {
+        if (pessoa.getCpf() == null) {
             pessoa.setCpf(Long.parseLong(txtCpf.getText()));
-//        }
+        }
+
         pessoa.setNome(txtNome.getText());
         pessoa.setEndereco(txtEndereco.getText());
     }
@@ -315,7 +312,7 @@ public class CadastroPessoa extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jpPrincipal;
     private com.mycompany.cantina.gui.TxtField txtCpf;
-    private javax.swing.JTextField txtEndereco;
-    private javax.swing.JTextField txtNome;
+    private com.mycompany.cantina.gui.TxtField txtEndereco;
+    private com.mycompany.cantina.gui.TxtField txtNome;
     // End of variables declaration//GEN-END:variables
 }

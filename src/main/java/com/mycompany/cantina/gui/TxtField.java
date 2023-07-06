@@ -26,7 +26,7 @@ public class TxtField extends javax.swing.JTextField {
 
     //<editor-fold defaultstate="collapsed" desc="Construtores">
     public TxtField() {
-        this(new Color(255, 255, 255), new Color(255, 255, 180));
+        this(new Color(255, 255, 255), new Color(255, 255, 230));
     }
 
     public TxtField(Color corPadrao, Color corFoco) {
